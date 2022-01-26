@@ -120,8 +120,13 @@ export default {
 input {
   margin-bottom: 10px;
   width: 200px;
-  font-family: Roboto, sans-serif;
+  font-family: inherit;
   font-size: 24px;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
 }
 
 .big-span {

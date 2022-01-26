@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <span>Salary:</span>
     <span class="big-span">
       $
       <input
@@ -10,6 +11,7 @@
         @input="$emit('updateSalary', +$event.target.value)"
       >
     </span>
+    <span>Taxes:</span>
     <span class="big-span">
       %
       <input

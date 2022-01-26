@@ -5,13 +5,13 @@
         <p class="expense-item-p">Expense name: {{ expense.name }}</p>
         <p class="expense-item-p">Expense amount: {{ expense.amount }}$</p>
         <button
-          class="delete-expense"
+          class="absolute-button delete-expense"
           @click="deleteExpense(index)"
         >
           <i class="fas fa-trash"></i>
         </button>
         <button
-          class="switch-expense"
+          class="absolute-button switch-expense"
           @click="switchExpense(index)"
         >
           <span :class="checkboxBackground(expense)" class="switch-expense-inner"><i class="fas fa-check"></i></span>
@@ -115,26 +115,21 @@ export default {
   margin: 10px;
 }
 
-.delete-expense {
+.absolute-button {
   position: absolute;
-  right: 0;
-  top: 0;
   background: none;
-  border: 0;
   padding: 5px;
   font-size: 16px;
-  cursor: pointer;
+}
+
+.delete-expense {
+  right: 0;
+  top: 0;
 }
 
 .switch-expense {
-  position: absolute;
   right: 0;
   bottom: 0;
-  background: none;
-  border: 0;
-  padding: 5px;
-  font-size: 16px;
-  cursor: pointer;
 }
 
 .switch-expense-inner {
@@ -143,11 +138,8 @@ export default {
 }
 
 .add-button {
-  border-radius: 50%;
-  border: 0;
   background: none;
   font-size: 40px;
-  cursor: pointer;
 }
 
 .new-expense {
@@ -159,9 +151,7 @@ export default {
 .save-button {
   padding: 5px;
   border-radius: 3px;
-  border: 0;
   font-size: 24px;
-  cursor: pointer;
 }
 
 
