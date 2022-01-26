@@ -2,7 +2,7 @@
   <div class="container">
     <p class="stat-item">Net salary: <strong>{{netSalary}}$</strong></p>
     <p class="stat-item">Planned expenses: <strong>{{plannedExpenses}}$</strong></p>
-    <p class="stat-item">Free money: <strong>{{freeMoney}}$</strong></p>
+    <p class="stat-item">Free money: <strong>{{freeMoney}}$ ({{freeMoneyPercent}}%)</strong></p>
   </div>
 </template>
 
@@ -22,6 +22,9 @@ export default {
   computed: {
     freeMoney() {
       return +(this.netSalary - this.plannedExpenses).toFixed(1);
+    },
+    freeMoneyPercent() {
+      return +(this.freeMoney / this.netSalary * 100).toFixed(0);
     }
   }
 }
