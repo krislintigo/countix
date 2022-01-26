@@ -29,6 +29,8 @@
 import SalaryInputs from "@/components/SalaryInputs";
 import BasicExpenses from "@/components/BasicExpenses";
 import Statistics from "@/components/Statistics";
+import chartData from "@/data/chartData";
+import LocalStorageService from "@/services/localStorage.service";
 
 export default {
   name: 'App',
@@ -39,20 +41,20 @@ export default {
   },
   data() {
     return {
-      salary: +localStorage.getItem('salary') || 0,
-      taxes: +localStorage.getItem('taxes') || 0,
-      basicExpenses: JSON.parse(localStorage.getItem('basicExpenses')) || []
+      salary: LocalStorageService.getNumber('salary'),
+      taxes: LocalStorageService.getNumber('taxes'),
+      basicExpenses: LocalStorageService.getArray('basicExpenses'),
     }
   },
   methods: {
     updateSalary(salary) {
-      this.salary = salary;
-      localStorage.setItem('salary', salary);
+      this.salary = salary
+      LocalStorageService.setItem('salary', salary)
     },
     updateTaxes(taxes) {
       if (taxes >= 0 && taxes < 100) {
-        this.taxes = taxes;
-        localStorage.setItem('taxes', taxes);
+        this.taxes = taxes
+        LocalStorageService.setItem('taxes', taxes)
       }
     }
   },
@@ -66,44 +68,16 @@ export default {
     plannedExpenses() {
       return this.selectedExpenses.reduce((acc, cur) => acc + cur.amount, 0)
     },
+    labels() {
+      return this.selectedExpenses.map(expense => expense.name)
+    },
     series() {
       return this.selectedExpenses.map(expense => expense.amount)
     },
     options() {
       return {
-        chart: {
-          fontFamily: 'Roboto, sans-serif',
-        },
-        colors: ['#008FFB', '#FEB019', '#FF4560', '#775DD0', '#FD6A6A',
-          '#00D9C6', '#3DDC84', '#6F0062', '#AA2407', '#74A325'],
-        labels: this.selectedExpenses.map(expense => expense.name),
-        plotOptions: {
-          pie: {
-            donut: {
-              labels: {
-                show: true,
-                value: {
-                  formatter(value) {
-                    return `${value}$`;
-                  }
-                }
-              }
-            }
-          }
-        },
-        tooltip: {
-          enabled: false,
-        },
-        legend: {
-          show: true,
-        },
-        title: {
-          text: 'Expenses',
-          style: {
-            fontSize: '20px',
-            fontWeight: 'bold',
-          }
-        }
+        labels: this.labels,
+        ...chartData
       }
     }
   }
