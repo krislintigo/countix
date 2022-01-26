@@ -161,4 +161,10 @@ export default {
 .bg-red {
   background: red;
 }
+
+@media (max-width: 1000px) {
+  .expense-item {
+    width: 100%;
+  }
+}
 </style>

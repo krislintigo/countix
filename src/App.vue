@@ -9,10 +9,10 @@
       />
       <BasicExpenses :basic-expenses="basicExpenses" />
     </div>
-    <div>
+    <div class="canvas-container">
       <apexchart
         type="donut"
-        width="500"
+        width="100%"
         :options="options"
         :series="series"
       >
@@ -129,7 +129,22 @@ button {
   cursor: pointer;
 }
 
+.canvas-container {
+  width: 550px;
+}
+
 .big-span {
   font-size: 24px;
+}
+
+@media (max-width: 1000px) {
+  #app {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .canvas-container {
+    width: 100%;
+  }
 }
 </style>
