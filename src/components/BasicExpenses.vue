@@ -1,0 +1,174 @@
+<template>
+  <section>
+    <div class="expense-list">
+      <div v-for="(expense, index) in basicExpenses" :key="expense.name" class="expense-item">
+        <p class="expense-item-p">Expense name: {{ expense.name }}</p>
+        <p class="expense-item-p">Expense amount: {{ expense.amount }}$</p>
+        <button
+          class="delete-expense"
+          @click="deleteExpense(index)"
+        >
+          <i class="fas fa-trash"></i>
+        </button>
+        <button
+          class="switch-expense"
+          @click="switchExpense(index)"
+        >
+          <span :class="checkboxBackground(expense)" class="switch-expense-inner"><i class="fas fa-check"></i></span>
+        </button>
+      </div>
+    </div>
+    <button
+      v-if="!addingNew"
+      class="add-button"
+      @click="addingNew = true"
+    >
+      <i class="fas fa-plus"></i>
+    </button>
+    <div v-else class="new-expense" @keydown.enter="saveNewExpense">
+      <span>Expense name:</span>
+      <input
+        v-model="newExpense.name"
+      >
+      <span>Expense amount:</span>
+      <span class="big-span">
+        $
+        <input
+          type="number"
+          v-model.number="newExpense.amount"
+        >
+      </span>
+      <button
+        @click="saveNewExpense"
+        class="save-button"
+      >
+        <span><i class="far fa-save"></i> Add</span>
+      </button>
+    </div>
+  </section>
+</template>
+
+<script>
+export default {
+  name: "BasicExpenses",
+  props: {
+    basicExpenses: {
+      type: Array,
+      required: true
+    }
+  },
+  data() {
+    return {
+      addingNew: false,
+      newExpense: {
+        name: "",
+        amount: 0,
+        considered: true
+      }
+    }
+  },
+  methods: {
+    saveNewExpense() {
+      this.basicExpenses.push(this.newExpense)
+      localStorage.setItem("basicExpenses", JSON.stringify(this.basicExpenses));
+      this.newExpense = {
+        name: "",
+        amount: 0,
+        considered: true
+      }
+      this.addingNew = false
+    },
+    deleteExpense(index) {
+      this.basicExpenses.splice(index, 1);
+      localStorage.setItem("basicExpenses", JSON.stringify(this.basicExpenses));
+    },
+    switchExpense(index) {
+      this.basicExpenses.forEach((expense, i) => {
+        if (i === index) {
+          expense.considered = !expense.considered
+        }
+      })
+      localStorage.setItem("basicExpenses", JSON.stringify(this.basicExpenses));
+    },
+    checkboxBackground(expense) {
+      return expense.considered ? "bg-green" : "bg-red"
+    }
+  }
+}
+</script>
+
+<style scoped>
+.expense-list {
+  margin: 30px 0;
+}
+
+.expense-item {
+  position: relative;
+  width: 500px;
+  margin-bottom: 10px;
+  padding: 5px;
+  font-size: 20px;
+  border: 1px solid deepskyblue;
+}
+
+.expense-item-p {
+  margin: 10px;
+}
+
+.delete-expense {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: none;
+  border: 0;
+  padding: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.switch-expense {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: none;
+  border: 0;
+  padding: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.switch-expense-inner {
+  padding: 1px;
+  border-radius: 2px;
+}
+
+.add-button {
+  border-radius: 50%;
+  border: 0;
+  background: none;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.new-expense {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.save-button {
+  padding: 5px;
+  border-radius: 3px;
+  border: 0;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+
+.bg-green {
+  background: green;
+}
+.bg-red {
+  background: red;
+}
+</style>
