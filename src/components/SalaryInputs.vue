@@ -27,19 +27,15 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
-  name: "SalaryInputs",
-  props: {
-    salary: {
-      type: Number,
-      required: true
-    },
-    taxes: {
-      type: Number,
-      required: true
-    }
-  },
-}
+  name: 'SalaryInputs',
+  computed: mapGetters([
+    'salary',
+    'taxes',
+  ]),
+};
 </script>
 
 <style scoped>

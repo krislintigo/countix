@@ -2,86 +2,59 @@
   <div id="app">
     <div>
       <SalaryInputs
-        :salary="salary"
-        :taxes="taxes"
         @updateSalary="updateSalary"
         @updateTaxes="updateTaxes"
       />
-      <BasicExpenses :basic-expenses="basicExpenses" />
+      <BasicExpenses />
     </div>
     <div class="canvas-container">
-      <apexchart
+      <apex-chart
         type="donut"
         width="100%"
         :options="options"
         :series="series"
       >
-      </apexchart>
-      <Statistics
-        :net-salary="netSalary"
-        :planned-expenses="plannedExpenses"
-      />
+      </apex-chart>
+      <Statistics />
     </div>
   </div>
 </template>
 
 <script>
-import SalaryInputs from "@/components/SalaryInputs";
-import BasicExpenses from "@/components/BasicExpenses";
-import Statistics from "@/components/Statistics";
-import chartData from "@/data/chartData";
-import LocalStorageService from "@/services/localStorage.service";
+import SalaryInputs from '@/components/SalaryInputs';
+import BasicExpenses from '@/components/BasicExpenses';
+import Statistics from '@/components/Statistics';
+import { mapGetters } from "vuex";
 
 export default {
   name: 'App',
   components: {
     Statistics,
     BasicExpenses,
-    SalaryInputs
-  },
-  data() {
-    return {
-      salary: LocalStorageService.getNumber('salary'),
-      taxes: LocalStorageService.getNumber('taxes'),
-      basicExpenses: LocalStorageService.getArray('basicExpenses'),
-    }
+    SalaryInputs,
   },
   methods: {
     updateSalary(salary) {
-      this.salary = salary
-      LocalStorageService.setItem('salary', salary)
+      this.$store.dispatch('setSalary', salary);
     },
     updateTaxes(taxes) {
       if (taxes >= 0 && taxes < 100) {
-        this.taxes = taxes
-        LocalStorageService.setItem('taxes', taxes)
+        this.$store.dispatch('setTaxes', taxes);
       }
-    }
+    },
   },
-  computed: {
-    netSalary() {
-      return +(this.salary - this.taxes / 100 * this.salary).toFixed(1)
-    },
-    selectedExpenses() {
-      return this.basicExpenses.filter(expense => expense.considered)
-    },
-    plannedExpenses() {
-      return this.selectedExpenses.reduce((acc, cur) => acc + cur.amount, 0)
-    },
-    labels() {
-      return this.selectedExpenses.map(expense => expense.name)
-    },
-    series() {
-      return this.selectedExpenses.map(expense => expense.amount)
-    },
-    options() {
-      return {
-        labels: this.labels,
-        ...chartData
-      }
-    }
-  }
-}
+  computed: mapGetters([
+    'salary',
+    'taxes',
+    'basicExpenses',
+    'netSalary',
+    'consideredExpenses',
+    'plannedExpenses',
+    'labels',
+    'series',
+    'options',
+  ]),
+};
 </script>
 
 <style>

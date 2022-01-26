@@ -54,52 +54,42 @@
 </template>
 
 <script>
-import LocalStorageService from "@/services/localStorage.service";
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "BasicExpenses",
-  props: {
-    basicExpenses: {
-      type: Array,
-      required: true
-    }
-  },
+  name: 'BasicExpenses',
   data() {
     return {
       addingNew: false,
       newExpense: {
-        name: "",
-        amount: 0
-      }
-    }
+        name: '',
+        amount: 0,
+      },
+    };
   },
+  computed: mapGetters([
+    'basicExpenses',
+  ]),
   methods: {
     saveNewExpense() {
-      this.basicExpenses.push({ ...this.newExpense, considered: true })
-      LocalStorageService.setObject("basicExpenses", this.basicExpenses)
-      this.resetNewExpense()
-      this.addingNew = false
+      this.$store.dispatch('addBasicExpense', this.newExpense);
+      this.resetNewExpense();
+      this.addingNew = false;
     },
     deleteExpense(index) {
-      this.basicExpenses.splice(index, 1)
-      LocalStorageService.setObject("basicExpenses", this.basicExpenses)
+      this.$store.dispatch('deleteBasicExpense', index);
     },
     switchExpense(index) {
-      this.basicExpenses.forEach((expense, i) => {
-        if (i === index) {
-          expense.considered = !expense.considered
-        }
-      })
-      LocalStorageService.setObject("basicExpenses", this.basicExpenses)
+      this.$store.dispatch('switchBasicExpense', index);
     },
     resetNewExpense() {
       this.newExpense = {
-        name: "",
-        amount: 0
-      }
-    }
-  }
-}
+        name: '',
+        amount: 0,
+      };
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -158,7 +148,6 @@ export default {
   border-radius: 3px;
   font-size: 24px;
 }
-
 
 .bg-green {
   background: green;

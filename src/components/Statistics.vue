@@ -7,27 +7,18 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
-  name: "Statistics",
-  props: {
-    netSalary: {
-      type: Number,
-      required: true
-    },
-    plannedExpenses: {
-      type: Number,
-      required: true
-    }
-  },
-  computed: {
-    freeMoney() {
-      return +(this.netSalary - this.plannedExpenses).toFixed(1);
-    },
-    freeMoneyPercent() {
-      return +(this.freeMoney / this.netSalary * 100).toFixed(0);
-    }
-  }
-}
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: 'Statistics',
+  computed: mapGetters([
+    'netSalary',
+    'plannedExpenses',
+    'freeMoney',
+    'freeMoneyPercent',
+  ]),
+};
 </script>
 
 <style scoped>

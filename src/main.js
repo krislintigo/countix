@@ -1,13 +1,14 @@
-import Vue from 'vue'
-import App from './App.vue'
-import VueApexCharts from "vue-apexcharts"
+import Vue from 'vue';
+import VueApexCharts from 'vue-apexcharts';
+import App from './App.vue';
+import store from './store';
 
-Vue.use(VueApexCharts)
-Vue.component('apexchart', VueApexCharts)
+Vue.use(VueApexCharts);
+Vue.component('apex-chart', VueApexCharts);
 
-
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  store,
+  render: (h) => h(App),
+}).$mount('#app');

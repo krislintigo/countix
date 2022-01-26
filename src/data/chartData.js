@@ -12,11 +12,11 @@ export default {
           value: {
             formatter(value) {
               return `${value}$`;
-            }
-          }
-        }
-      }
-    }
+            },
+          },
+        },
+      },
+    },
   },
   tooltip: {
     enabled: false,
@@ -29,6 +29,6 @@ export default {
     style: {
       fontSize: '20px',
       fontWeight: 'bold',
-    }
-  }
-}
+    },
+  },
+};
