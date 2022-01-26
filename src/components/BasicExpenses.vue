@@ -14,7 +14,12 @@
           class="absolute-button switch-expense"
           @click="switchExpense(index)"
         >
-          <span :class="checkboxBackground(expense)" class="switch-expense-inner"><i class="fas fa-check"></i></span>
+          <span
+            :class="expense.considered ? 'bg-green' :'bg-red'"
+            class="switch-expense-inner"
+          >
+            <i class="fas fa-check"></i>
+          </span>
         </button>
       </div>
     </div>
@@ -49,6 +54,8 @@
 </template>
 
 <script>
+import LocalStorageService from "@/services/localStorage.service";
+
 export default {
   name: "BasicExpenses",
   props: {
@@ -62,25 +69,20 @@ export default {
       addingNew: false,
       newExpense: {
         name: "",
-        amount: 0,
-        considered: true
+        amount: 0
       }
     }
   },
   methods: {
     saveNewExpense() {
-      this.basicExpenses.push(this.newExpense)
-      localStorage.setItem("basicExpenses", JSON.stringify(this.basicExpenses));
-      this.newExpense = {
-        name: "",
-        amount: 0,
-        considered: true
-      }
+      this.basicExpenses.push({ ...this.newExpense, considered: true })
+      LocalStorageService.setObject("basicExpenses", this.basicExpenses)
+      this.resetNewExpense()
       this.addingNew = false
     },
     deleteExpense(index) {
-      this.basicExpenses.splice(index, 1);
-      localStorage.setItem("basicExpenses", JSON.stringify(this.basicExpenses));
+      this.basicExpenses.splice(index, 1)
+      LocalStorageService.setObject("basicExpenses", this.basicExpenses)
     },
     switchExpense(index) {
       this.basicExpenses.forEach((expense, i) => {
@@ -88,10 +90,13 @@ export default {
           expense.considered = !expense.considered
         }
       })
-      localStorage.setItem("basicExpenses", JSON.stringify(this.basicExpenses));
+      LocalStorageService.setObject("basicExpenses", this.basicExpenses)
     },
-    checkboxBackground(expense) {
-      return expense.considered ? "bg-green" : "bg-red"
+    resetNewExpense() {
+      this.newExpense = {
+        name: "",
+        amount: 0
+      }
     }
   }
 }
