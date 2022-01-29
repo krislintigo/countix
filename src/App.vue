@@ -20,7 +20,7 @@
             :series="series"
           >
           </apex-chart>
-          <Statistics/>
+          <ExpenseStatistics />
         </v-col>
       </v-row>
     </v-main>
@@ -30,13 +30,13 @@
 <script>
 import SalaryInputs from '@/components/SalaryInputs';
 import BasicExpenses from '@/components/BasicExpenses';
-import Statistics from '@/components/Statistics';
 import {mapGetters} from "vuex";
+import ExpenseStatistics from "@/components/ExpenseStatistics";
 
 export default {
   name: 'App',
   components: {
-    Statistics,
+    ExpenseStatistics,
     BasicExpenses,
     SalaryInputs,
   },

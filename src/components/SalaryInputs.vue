@@ -6,8 +6,7 @@
       label="Salary"
       prefix="$"
       type="number"
-      :value="salary"
-      @input.native="$emit('updateSalary', +$event.target.value)"
+      v-model="salary"
       ></v-text-field>
     <v-text-field
       class="text-h6"
@@ -15,21 +14,33 @@
       label="Taxes"
       prefix="%"
       type="number"
-      :value="taxes"
-      @input.native="$emit('updateTaxes', +$event.target.value)"
+      v-model="taxes"
     ></v-text-field>
   </v-col>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 
 export default {
   name: 'SalaryInputs',
-  computed: mapGetters([
-    'salary',
-    'taxes',
-  ]),
+  computed: {
+    salary: {
+      get() {
+        return this.$store.getters.salary;
+      },
+      set(value) {
+        this.$store.commit('setSalary', value);
+      }
+    },
+    taxes: {
+      get() {
+        return this.$store.getters.taxes;
+      },
+      set(value) {
+        this.$store.commit('setTaxes', value);
+      }
+    }
+  }
 };
 </script>
 
