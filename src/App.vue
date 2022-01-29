@@ -1,25 +1,14 @@
 <template>
   <v-app>
-    <v-app-bar color="primary" app dark>
-      <h1 class="text-h4">Countix</h1>
-    </v-app-bar>
+    <AppBar />
     <v-main class="mt-3">
       <v-row justify="space-around">
         <v-col cols="4">
-          <SalaryInputs
-            @updateSalary="updateSalary"
-            @updateTaxes="updateTaxes"
-          />
+          <SalaryInputs />
           <BasicExpenses/>
         </v-col>
         <v-col cols="6">
-          <apex-chart
-            type="donut"
-            width="70%"
-            :options="options"
-            :series="series"
-          >
-          </apex-chart>
+          <DonutChart />
           <ExpenseStatistics />
         </v-col>
       </v-row>
@@ -30,37 +19,19 @@
 <script>
 import SalaryInputs from '@/components/SalaryInputs';
 import BasicExpenses from '@/components/BasicExpenses';
-import {mapGetters} from "vuex";
 import ExpenseStatistics from "@/components/ExpenseStatistics";
+import DonutChart from "@/components/DonutChart";
+import AppBar from "@/components/AppBar";
 
 export default {
   name: 'App',
   components: {
+    AppBar,
+    DonutChart,
     ExpenseStatistics,
     BasicExpenses,
     SalaryInputs,
   },
-  methods: {
-    updateSalary(salary) {
-      this.$store.dispatch('setSalary', salary);
-    },
-    updateTaxes(taxes) {
-      if (taxes >= 0 && taxes < 100) {
-        this.$store.dispatch('setTaxes', taxes);
-      }
-    },
-  },
-  computed: mapGetters([
-    'salary',
-    'taxes',
-    'basicExpenses',
-    'netSalary',
-    'consideredExpenses',
-    'plannedExpenses',
-    'labels',
-    'series',
-    'options',
-  ]),
 };
 </script>
 
