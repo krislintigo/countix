@@ -1,6 +1,7 @@
 <template>
   <v-col class="d-flex flex-column">
     <v-text-field
+      class="text-h6"
       outlined
       label="Salary"
       prefix="$"
@@ -9,6 +10,7 @@
       @input.native="$emit('updateSalary', +$event.target.value)"
       ></v-text-field>
     <v-text-field
+      class="text-h6"
       outlined
       label="Taxes"
       prefix="%"

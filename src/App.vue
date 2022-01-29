@@ -1,9 +1,9 @@
 <template>
   <v-app>
     <v-app-bar color="primary" app dark>
-      <v-app-bar-title>Countix</v-app-bar-title>
+      <h1 class="text-h4">Countix</h1>
     </v-app-bar>
-    <v-main>
+    <v-main class="mt-3">
       <v-row justify="space-around">
         <v-col cols="4">
           <SalaryInputs
@@ -65,17 +65,5 @@ export default {
 </script>
 
 <style>
-.canvas-container {
-  width: 550px;
-}
 
-.big-span {
-  font-size: 24px;
-}
-
-@media (max-width: 1000px) {
-  .canvas-container {
-    width: 100%;
-  }
-}
 </style>

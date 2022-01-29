@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
-    <p class="stat-item">Net salary: <strong>{{netSalary}}$</strong></p>
-    <p class="stat-item">Planned expenses: <strong>{{plannedExpenses}}$</strong></p>
-    <p class="stat-item">Free money: <strong>{{freeMoney}}$ ({{freeMoneyPercent}}%)</strong></p>
+  <div class="mt-10">
+    <p class="text-h5">Net salary: <strong class="text-h4">{{netSalary}}$</strong></p>
+    <p class="text-h5">Planned expenses: <strong class="text-h4">{{plannedExpenses}}$</strong></p>
+    <p class="text-h5">Free money: <strong class="text-h4">{{freeMoney}}$ ({{freeMoneyPercent}}%)</strong></p>
   </div>
 </template>
 
@@ -22,11 +22,5 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  margin-top: 40px;
-}
 
-.stat-item {
-  font-size: 24px;
-}
 </style>

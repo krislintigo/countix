@@ -1,12 +1,13 @@
 <template>
-  <section>
+  <draggable v-model="basicExpenses">
     <v-card
+      style="cursor: move;"
       v-for="(expense, index) in basicExpenses"
       :key="expense.id"
       class="mb-3"
     >
-      <v-card-title>{{expense.name}}</v-card-title>
-      <v-card-subtitle>{{expense.amount}}$</v-card-subtitle>
+      <v-card-title>{{ expense.name }}</v-card-title>
+      <v-card-subtitle>{{ expense.amount }}$</v-card-subtitle>
       <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
           <v-btn
@@ -37,17 +38,27 @@
         </v-list>
       </v-menu>
     </v-card>
-  </section>
+  </draggable>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import draggable from "vuedraggable";
 
 export default {
   name: "ExpensesList",
-  computed: mapGetters([
-    'basicExpenses'
-  ]),
+  components: {
+    draggable
+  },
+  computed: {
+    basicExpenses: {
+      get() {
+        return this.$store.getters.basicExpenses;
+      },
+      set(value) {
+        this.$store.commit("setBasicExpenses", value);
+      }
+    },
+  }
 }
 </script>
 

@@ -33,6 +33,10 @@ export default {
       state.taxes = taxes;
       LocalStorageService.setItem('taxes', taxes);
     },
+    setBasicExpenses(state, basicExpenses) {
+      state.basicExpenses = basicExpenses;
+      LocalStorageService.setObject('basicExpenses', basicExpenses);
+    },
     addBasicExpense(state, expense) {
       state.basicExpenses.push({ ...expense, considered: true, id: Date.now() });
       LocalStorageService.setObject('basicExpenses', state.basicExpenses);
