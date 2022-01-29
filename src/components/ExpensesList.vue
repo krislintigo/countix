@@ -70,8 +70,6 @@ export default {
         group: 'description',
         disabled: false,
         ghostClass: 'my-ghost',
-        chosenClass: 'my-chosen',
-        dragClass: 'my-drag',
       }
     }
   }
@@ -93,9 +91,6 @@ export default {
 }
 .my-ghost {
   opacity: 1;
-}
-.my-chosen {
-  background: deepskyblue;
 }
 .list-group-item {
   cursor: move;
