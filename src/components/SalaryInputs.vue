@@ -1,29 +1,22 @@
 <template>
-  <div class="main">
-    <span>Salary:</span>
-    <span class="big-span">
-      $
-      <input
-        type="number"
-        placeholder="Salary"
-        min="0"
-        :value="salary"
-        @input="$emit('updateSalary', +$event.target.value)"
-      >
-    </span>
-    <span>Taxes:</span>
-    <span class="big-span">
-      %
-      <input
-        type="number"
-        placeholder="Taxes"
-        min="0"
-        max="100"
-        :value="taxes"
-        @input="$emit('updateTaxes', +$event.target.value)"
-      >
-    </span>
-  </div>
+  <v-col class="d-flex flex-column">
+    <v-text-field
+      outlined
+      label="Salary"
+      prefix="$"
+      type="number"
+      :value="salary"
+      @input.native="$emit('updateSalary', +$event.target.value)"
+      ></v-text-field>
+    <v-text-field
+      outlined
+      label="Taxes"
+      prefix="%"
+      type="number"
+      :value="taxes"
+      @input.native="$emit('updateTaxes', +$event.target.value)"
+    ></v-text-field>
+  </v-col>
 </template>
 
 <script>
@@ -39,9 +32,5 @@ export default {
 </script>
 
 <style scoped>
-.main {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
+
 </style>
