@@ -34,19 +34,23 @@ export default {
       LocalStorageService.setItem('taxes', taxes);
     },
     addBasicExpense(state, expense) {
-      state.basicExpenses.push({ ...expense, considered: true });
+      state.basicExpenses.push({ ...expense, considered: true, id: Date.now() });
+      LocalStorageService.setObject('basicExpenses', state.basicExpenses);
+    },
+    updateBasicExpense(state, expense) {
+      state.basicExpenses.forEach((item) => {
+        if (item.id === expense.id) {
+          item.name = expense.name;
+          item.amount = expense.amount;
+        }
+      });
       LocalStorageService.setObject('basicExpenses', state.basicExpenses);
     },
     deleteBasicExpense(state, index) {
       state.basicExpenses.splice(index, 1);
       LocalStorageService.setObject('basicExpenses', state.basicExpenses);
     },
-    switchBasicExpense(state, index) {
-      state.basicExpenses.forEach((expense, i) => {
-        if (i === index) {
-          expense.considered = !expense.considered;
-        }
-      });
+    switchBasicExpense(state) {
       LocalStorageService.setObject('basicExpenses', state.basicExpenses);
     }
   },
@@ -59,6 +63,9 @@ export default {
     },
     addBasicExpense({ commit }, expense) {
       commit('addBasicExpense', expense);
+    },
+    updateBasicExpense({ commit }, expense) {
+      commit('updateBasicExpense', expense);
     },
     deleteBasicExpense({ commit }, index) {
       commit('deleteBasicExpense', index);
