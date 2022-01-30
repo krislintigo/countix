@@ -29,7 +29,7 @@
           </v-btn>
         </v-list-item>
         <v-list-item>
-          <v-checkbox v-model="expense.considered" @change="switchExpense(index)" label="Switch"></v-checkbox>
+          <v-checkbox v-model="expense.considered" @change="switchExpense" label="Switch"></v-checkbox>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -40,10 +40,6 @@
 export default {
   name: "ExpenseItem",
   props: {
-    index: {
-      type: Number,
-      required: true
-    },
     id: {
       type: Number,
       required: true
@@ -60,8 +56,8 @@ export default {
     deleteExpense(id) {
       this.$store.dispatch('deleteBasicExpense', id);
     },
-    switchExpense(index) {
-      this.$store.dispatch('switchBasicExpense', index);
+    switchExpense() {
+      this.$store.dispatch('setExpensesAndFolders');
     },
   }
 }

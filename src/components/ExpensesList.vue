@@ -4,9 +4,8 @@
       <draggable v-model="basicExpenses" v-bind="dragOptions1" @start="drag = true" @end="drag = false">
         <transition-group type="transition" :name="!drag ? 'flip-list' : null" class="main-list">
           <ExpenseItem
-            v-for="(expense, index) in basicExpenses"
+            v-for="expense in basicExpenses"
             :id="expense.id"
-            :index="index"
             :key="expense.id"
             @edit="$emit('editExpense', expense)"
           />
@@ -17,16 +16,16 @@
       <draggable v-model="folders" v-bind="dragOptions2" @start="drag = true" @end="drag = false">
         <transition-group type="transition" :name="!drag ? 'flip-list' : null">
           <v-expansion-panel v-for="(folder) in folders" :key="folder.id" class="list-group-item">
-            <v-expansion-panel-header class="text-h5">{{ folder.name }} ({{ expenseAmountByFolder(folder.id) }}$)
+            <v-expansion-panel-header class="text-h5">
+              {{ folder.name }} ({{ expenseAmountByFolder(folder.id) }}$)
             </v-expansion-panel-header>
             <v-expansion-panel-content>
               <draggable v-model="folder.expenses" v-bind="dragOptions1" @start="drag = true"
                          @end="updateFolders" @add="updateFolders"
               >
                 <ExpenseItem
-                  v-for="(folderExpense, idx) in folder.expenses"
+                  v-for="folderExpense in folder.expenses"
                   :id="folderExpense.id"
-                  :index="idx"
                   :key="folderExpense.id"
                   @edit="$emit('editExpense', folderExpense)"
                 />

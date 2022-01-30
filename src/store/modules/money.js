@@ -86,7 +86,7 @@ export default {
       LocalStorageService.setObject('basicExpenses', state.basicExpenses);
       LocalStorageService.setObject('folders', state.folders);
     },
-    switchBasicExpense(state) {
+    setExpensesAndFolders(state) {
       LocalStorageService.setObject('basicExpenses', state.basicExpenses);
       LocalStorageService.setObject('folders', state.folders);
     },
@@ -111,8 +111,8 @@ export default {
     deleteBasicExpense({ commit }, id) {
       commit('deleteBasicExpense', id);
     },
-    switchBasicExpense({ commit }, index) {
-      commit('switchBasicExpense', index);
+    setExpensesAndFolders({ commit }) {
+      commit('setExpensesAndFolders');
     },
     addFolder({ commit }, folder) {
       commit('addFolder', folder);
