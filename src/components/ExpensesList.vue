@@ -15,11 +15,14 @@
     </section>
     <v-expansion-panels popout multiple :key="666" class="mb-3 d-block">
       <draggable v-model="folders" v-bind="dragOptions2" @start="drag = true" @end="drag = false">
-          <v-expansion-panel v-for="(folder, i) in folders" :key="i">
+        <transition-group type="transition" :name="!drag ? 'flip-list' : null">
+          <v-expansion-panel v-for="(folder) in folders" :key="folder.id" class="list-group-item">
             <v-expansion-panel-header class="text-h5">{{ folder.name }} ({{ expenseAmountByFolder(folder.id) }}$)
             </v-expansion-panel-header>
             <v-expansion-panel-content>
-              <draggable v-model="folder.expenses" v-bind="dragOptions1" @start="drag = true" @end="drag = false;">
+              <draggable v-model="folder.expenses" v-bind="dragOptions1" @start="drag = true"
+                         @end="updateFolders" @add="updateFolders"
+              >
                 <ExpenseItem
                   v-for="(folderExpense, idx) in folder.expenses"
                   :id="folderExpense.id"
@@ -30,6 +33,7 @@
               </draggable>
             </v-expansion-panel-content>
           </v-expansion-panel>
+        </transition-group>
       </draggable>
     </v-expansion-panels>
   </div>
@@ -57,9 +61,6 @@ export default {
       },
       set(value) {
         this.$store.commit("setBasicExpenses", value);
-        this.$nextTick(() => {
-          this.$store.commit("setFolders", this.folders);
-        });
       }
     },
     folders: {
@@ -74,7 +75,6 @@ export default {
       return {
         animation: 200,
         group: 'expenses',
-        disabled: false,
         ghostClass: 'my-ghost',
       }
     },
@@ -82,7 +82,6 @@ export default {
       return {
         animation: 200,
         group: 'folders',
-        disabled: false,
         ghostClass: 'my-ghost',
       }
     }
@@ -92,6 +91,10 @@ export default {
       return this.folders
         .find(folder => folder.id === folderId)
         .expenses.reduce((acc, expense) => acc + expense.amount, 0);
+    },
+    updateFolders() {
+      this.drag = false;
+      this.$store.commit("setFolders", this.folders);
     }
   }
 }
@@ -101,6 +104,10 @@ export default {
 .main-list {
   display: block;
   min-height: 20px;
+}
+
+.list-group-item {
+  cursor: move;
 }
 
 .flip-list-move {

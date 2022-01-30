@@ -74,7 +74,6 @@ export default {
   right: 0;
 }
 .list-group-item {
-  width: 100%;
   cursor: move;
 }
 </style>
