@@ -70,8 +70,8 @@
 <script>
 import { mapGetters } from 'vuex';
 import ExpensesList from "@/components/ExpensesList";
-import ExpenseDialog from "@/components/ExpenseDialog";
-import FolderDialog from "@/components/FolderDialog";
+import ExpenseDialog from "@/components/dialogs/ExpenseDialog";
+import FolderDialog from "@/components/dialogs/FolderDialog";
 
 export default {
   name: 'BasicExpenses',
