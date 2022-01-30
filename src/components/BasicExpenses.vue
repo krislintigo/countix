@@ -1,7 +1,8 @@
 <template>
   <section>
     <ExpensesList
-      @edit="setEditExpense"
+      @editExpense="setEditExpense"
+      @editFolder="setEditFolder"
     />
     <ExpenseDialog
       :open="expenseDialog"
@@ -12,49 +13,14 @@
       @save="saveExpenseInfo"
       @close="closeExpenseDialog"
     />
-<!--    <v-dialog-->
-<!--      v-model="dialog"-->
-<!--      max-width="370px"-->
-<!--    >-->
-<!--      <template v-slot:activator="{ on, attrs }">-->
-<!--        <v-btn-->
-<!--          color="primary"-->
-<!--          outlined-->
-<!--          dark-->
-<!--          v-bind="attrs"-->
-<!--          v-on="on"-->
-<!--          @click="setAppendingExpense"-->
-<!--        >-->
-<!--          Add new-->
-<!--        </v-btn>-->
-<!--      </template>-->
-<!--      <v-card>-->
-<!--        <v-card-title class="text-h5">-->
-<!--          Expense information-->
-<!--        </v-card-title>-->
-<!--        <v-col @keydown.enter="saveExpenseInfo">-->
-<!--          <v-text-field outlined label="Expense name" v-model="expenseData.name"></v-text-field>-->
-<!--          <v-text-field outlined label="Expense amount" prefix="$" v-model.number="expenseData.amount"></v-text-field>-->
-<!--        </v-col>-->
-<!--        <v-card-actions>-->
-<!--          <v-spacer></v-spacer>-->
-<!--          <v-btn-->
-<!--            color="red darken-1"-->
-<!--            text-->
-<!--            @click="dialog = false"-->
-<!--          >-->
-<!--            Close-->
-<!--          </v-btn>-->
-<!--          <v-btn-->
-<!--            color="primary darken-1"-->
-<!--            text-->
-<!--            @click="saveExpenseInfo"-->
-<!--          >-->
-<!--            Save-->
-<!--          </v-btn>-->
-<!--        </v-card-actions>-->
-<!--      </v-card>-->
-<!--    </v-dialog>-->
+    <FolderDialog
+      :open="folderDialog"
+      :folderData="folderData"
+      @setAppending="setAppendingFolder"
+      @setName="setFolderName"
+      @save="saveFolderInfo"
+      @close="closeFolderDialog"
+    />
   </section>
 </template>
 
@@ -62,17 +28,22 @@
 import { mapGetters } from 'vuex';
 import ExpensesList from "@/components/ExpensesList";
 import ExpenseDialog from "@/components/ExpenseDialog";
+import FolderDialog from "@/components/FolderDialog";
 
 export default {
   name: 'BasicExpenses',
-  components: {ExpenseDialog, ExpensesList},
+  components: {FolderDialog, ExpenseDialog, ExpensesList},
   data() {
     return {
       expenseDialog: false,
+      folderDialog: false,
       editFlag: false,
       expenseData: {
         name: '',
         amount: 0,
+      },
+      folderData: {
+        name: '',
       },
     };
   },
@@ -86,8 +57,14 @@ export default {
     setExpenseAmount(amount) {
       this.expenseData.amount = +amount;
     },
+    setFolderName(name) {
+      this.folderData.name = name;
+    },
     closeExpenseDialog() {
       this.expenseDialog = false;
+    },
+    closeFolderDialog() {
+      this.folderDialog = false;
     },
     saveExpenseInfo() {
       if (this.editFlag) {
@@ -98,6 +75,15 @@ export default {
       }
       this.expenseDialog = false;
     },
+    saveFolderInfo() {
+      if (this.editFlag) {
+        // this.$store.dispatch('updateBasicFolder', this.folderData);
+      }
+      else {
+        this.$store.dispatch('addFolder', this.folderData);
+      }
+      this.folderDialog = false;
+    },
     setAppendingExpense() {
       this.editFlag = false;
       this.expenseData = {
@@ -106,11 +92,23 @@ export default {
       };
       this.expenseDialog = true;
     },
+    setAppendingFolder() {
+      this.editFlag = false;
+      this.folderData = {
+        name: '',
+      };
+      this.folderDialog = true;
+    },
     setEditExpense(expense) {
       this.editFlag = true;
       this.expenseData = {...expense};
       this.expenseDialog = true;
-    }
+    },
+    setEditFolder(folder) {
+      this.editFlag = true;
+      this.folderData = {...folder};
+      this.folderDialog = true;
+    },
   },
 };
 </script>

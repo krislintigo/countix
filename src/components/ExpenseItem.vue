@@ -23,7 +23,7 @@
           </v-btn>
         </v-list-item>
         <v-list-item>
-          <v-btn plain @click="deleteExpense(index)">
+          <v-btn plain @click="deleteExpense(expense.id)">
             <v-icon>mdi-delete</v-icon>
             Delete
           </v-btn>
@@ -43,18 +43,22 @@ export default {
     index: {
       type: Number,
       required: true
-    }
+    },
+    id: {
+      type: Number,
+      required: true
+    },
   },
   computed: {
     expense: {
       get() {
-        return this.$store.getters.basicExpenses[this.index]
+        return this.$store.getters.basicExpenseById(this.id)
       }
     }
   },
   methods: {
-    deleteExpense(index) {
-      this.$store.dispatch('deleteBasicExpense', index);
+    deleteExpense(id) {
+      this.$store.dispatch('deleteBasicExpense', id);
     },
     switchExpense(index) {
       this.$store.dispatch('switchBasicExpense', index);
@@ -70,6 +74,7 @@ export default {
   right: 0;
 }
 .list-group-item {
+  width: 100%;
   cursor: move;
 }
 </style>
