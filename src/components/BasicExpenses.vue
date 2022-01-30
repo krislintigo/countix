@@ -4,6 +4,35 @@
       @editExpense="setEditExpense"
       @editFolder="setEditFolder"
     />
+    <v-speed-dial absolute right bottom direction="top" v-model="fab">
+      <template v-slot:activator>
+        <v-btn
+          v-model="fab"
+          color="blue darken-2"
+          dark
+          fab
+        >
+          <v-icon v-if="fab">
+            mdi-close
+          </v-icon>
+          <v-icon v-else>
+            mdi-plus
+          </v-icon>
+        </v-btn>
+      </template>
+      <v-btn
+        fab dark small color="red"
+        @click="setAppendingExpense"
+      >
+        <v-icon>mdi-circle-edit-outline</v-icon>
+      </v-btn>
+      <v-btn
+        fab dark small color="green"
+        @click="setAppendingFolder"
+      >
+        <v-icon>mdi-folder-outline</v-icon>
+      </v-btn>
+    </v-speed-dial>
     <ExpenseDialog
       :open="expenseDialog"
       :expenseData="expenseData"
@@ -35,6 +64,7 @@ export default {
   components: {FolderDialog, ExpenseDialog, ExpensesList},
   data() {
     return {
+      fab: false,
       expenseDialog: false,
       folderDialog: false,
       editFlag: false,

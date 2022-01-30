@@ -4,18 +4,6 @@
     @click:outside="$emit('close')"
     max-width="370px"
   >
-    <template v-slot:activator="{ on, attrs }">
-      <v-btn
-        color="primary"
-        outlined
-        dark
-        v-bind="attrs"
-        v-on="on"
-        @click="$emit('setAppending')"
-      >
-        Add new expense
-      </v-btn>
-    </template>
     <v-card>
       <v-card-title class="text-h5">
         Expense information
