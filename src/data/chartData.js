@@ -2,8 +2,9 @@ export default {
   chart: {
     fontFamily: 'Roboto, sans-serif',
   },
-  colors: ['#008FFB', '#FEB019', '#FF4560', '#775DD0', '#FD6A6A',
-    '#00D9C6', '#3DDC84', '#6F0062', '#AA2407', '#74A325'],
+  colors: ['#3F51B5', '#03A9F4', '#4CAF50', '#F9CE1D', '#FF9800',
+    '#D7263D', '#1B998B', '#2E294E', '#F46036', '#E2C044',
+    '#662E9B', '#F86624', '#F9C80E', '#EA3546', '#43BCCD'],
   plotOptions: {
     pie: {
       donut: {
@@ -32,7 +33,23 @@ export default {
     text: 'Expenses',
     style: {
       fontSize: '24px',
-      fontWeight: 'thin',
+      fontWeight: '500',
     },
+  },
+  dataLabels: {
+    style: {
+      fontSize: '12px',
+      fontWeight: 'normal'
+    },
+  },
+  noData: {
+    text: 'No data to display :(',
+    style: {
+      fontSize: '24px',
+      fontWeight: '500',
+    },
+  },
+  stroke: {
+    width: 1,
   },
 };
