@@ -4,7 +4,7 @@
       @editExpense="setEditExpense"
       @editFolder="setEditFolder"
     />
-    <v-speed-dial absolute right bottom direction="top" v-model="fab">
+    <v-speed-dial fixed right bottom direction="top" v-model="fab">
       <template v-slot:activator>
         <v-btn
           v-model="fab"
