@@ -121,7 +121,7 @@ export default {
     },
     saveFolderInfo() {
       if (this.editFlag) {
-        // this.$store.dispatch('updateBasicFolder', this.folderData);
+        this.$store.dispatch('updateFolder', this.folderData);
       }
       else {
         this.$store.dispatch('addFolder', this.folderData);

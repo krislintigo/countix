@@ -94,6 +94,18 @@ export default {
       state.folders.push({ ...folder, id: Date.now(), expenses: [] });
       LocalStorageService.setObject('folders', state.folders);
     },
+    updateFolder(state, folder) {
+      state.folders.forEach((item) => {
+        if (item.id === folder.id) {
+          item.name = folder.name;
+        }
+      });
+      LocalStorageService.setObject('folders', state.folders);
+    },
+    deleteFolder(state, id) {
+      state.folders = state.folders.filter((item) => item.id !== id);
+      LocalStorageService.setObject('folders', state.folders);
+    },
   },
   actions: {
     setSalary({ commit }, salary) {
@@ -116,6 +128,12 @@ export default {
     },
     addFolder({ commit }, folder) {
       commit('addFolder', folder);
+    },
+    updateFolder({ commit }, folder) {
+      commit('updateFolder', folder);
+    },
+    deleteFolder({ commit }, id) {
+      commit('deleteFolder', id);
     },
   },
 };
