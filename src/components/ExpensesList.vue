@@ -34,13 +34,13 @@
                     <v-list-item>
                       <v-btn plain @click="$emit('editFolder', folder)">
                         <v-icon>mdi-pen</v-icon>
-                        Edit
+                        ⁣⁣Edit
                       </v-btn>
                     </v-list-item>
                     <v-list-item>
                       <v-btn plain @click="deleteFolder(folder.id)">
                         <v-icon>mdi-delete</v-icon>
-                        Delete
+                        ⁣⁣Delete
                       </v-btn>
                     </v-list-item>
                   </v-list>

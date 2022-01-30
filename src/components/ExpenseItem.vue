@@ -4,7 +4,7 @@
   >
     <v-card-title>{{ expense.name }}</v-card-title>
     <v-card-subtitle>{{ expense.amount }}$</v-card-subtitle>
-    <v-menu offset-y>
+    <v-menu offset-y close-on-content-click>
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           icon
@@ -19,17 +19,17 @@
         <v-list-item>
           <v-btn plain @click="$emit('edit', expense)">
             <v-icon>mdi-pen</v-icon>
-            Edit
+            ⁣⁣Edit
           </v-btn>
         </v-list-item>
         <v-list-item>
           <v-btn plain @click="deleteExpense(expense.id)">
             <v-icon>mdi-delete</v-icon>
-            Delete
+            ⁣⁣Delete
           </v-btn>
         </v-list-item>
-        <v-list-item>
-          <v-checkbox v-model="expense.considered" @change="switchExpense" label="Switch"></v-checkbox>
+        <v-list-item class="justify-center">
+          <v-switch v-model="expense.considered" @change="switchExpense" label="Switch"></v-switch>
         </v-list-item>
       </v-list>
     </v-menu>
