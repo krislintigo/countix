@@ -20,18 +20,32 @@
           </v-icon>
         </v-btn>
       </template>
-      <v-btn
-        fab dark small color="red"
-        @click="setAppendingExpense"
-      >
-        <v-icon>mdi-circle-edit-outline</v-icon>
-      </v-btn>
-      <v-btn
-        fab dark small color="green"
-        @click="setAppendingFolder"
-      >
-        <v-icon>mdi-folder-outline</v-icon>
-      </v-btn>
+      <v-tooltip left>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            v-on="on"
+            v-bind="attrs"
+            fab dark small color="red"
+            @click="setAppendingExpense"
+          >
+            <v-icon>mdi-circle-edit-outline</v-icon>
+          </v-btn>
+        </template>
+        <span>Append expense</span>
+      </v-tooltip>
+      <v-tooltip left>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            v-on="on"
+            v-bind="attrs"
+            fab dark small color="green"
+            @click="setAppendingFolder"
+          >
+            <v-icon>mdi-folder-outline</v-icon>
+          </v-btn>
+        </template>
+        <span>Append folder</span>
+      </v-tooltip>
     </v-speed-dial>
     <ExpenseDialog
       :open="expenseDialog"
