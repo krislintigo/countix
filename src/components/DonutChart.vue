@@ -1,11 +1,12 @@
 <template>
-  <apex-chart
-    type="donut"
-    width="100%"
-    :options="options"
-    :series="series"
-  >
-  </apex-chart>
+  <section>
+    <apex-chart
+      type="donut"
+      :options="options"
+      :series="series"
+    >
+    </apex-chart>
+  </section>
 </template>
 
 <script>
