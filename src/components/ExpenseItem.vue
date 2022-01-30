@@ -48,7 +48,7 @@ export default {
   computed: {
     expense: {
       get() {
-        return this.$store.getters.flatBasicExpenses[this.index]
+        return this.$store.getters.basicExpenses[this.index]
       }
     }
   },
