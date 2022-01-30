@@ -22,13 +22,17 @@ export default {
     enabled: false,
   },
   legend: {
+    width: '200',
     show: true,
+    position: 'left',
+    offsetY: 20,
+    fontSize: '13px'
   },
   title: {
     text: 'Expenses',
     style: {
-      fontSize: '20px',
-      fontWeight: 'bold',
+      fontSize: '24px',
+      fontWeight: 'thin',
     },
   },
 };

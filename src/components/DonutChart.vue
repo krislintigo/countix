@@ -1,7 +1,7 @@
 <template>
   <apex-chart
     type="donut"
-    width="70%"
+    width="100%"
     :options="options"
     :series="series"
   >

@@ -7,7 +7,7 @@
           <SalaryInputs />
           <BasicExpenses/>
         </v-col>
-        <v-col cols="6">
+        <v-col cols="5">
           <DonutChart />
           <ExpenseStatistics />
         </v-col>
