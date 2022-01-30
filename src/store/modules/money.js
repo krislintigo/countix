@@ -14,13 +14,13 @@ export default {
     basicExpenses: (state) => state.basicExpenses,
     flatBasicExpenses: (state) => {
       const flatBasicExpenses = [];
-      state.basicExpenses.forEach((basicExpense) => {
-        flatBasicExpenses.push(basicExpense);
-      });
       state.folders.forEach((folder) => {
         folder.expenses.forEach((expense) => {
           flatBasicExpenses.push(expense);
         });
+      });
+      state.basicExpenses.forEach((basicExpense) => {
+        flatBasicExpenses.push(basicExpense);
       });
       return flatBasicExpenses;
     },

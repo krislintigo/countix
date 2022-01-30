@@ -1,5 +1,5 @@
 <template>
-  <v-col class="d-flex flex-column">
+  <v-col class="d-flex flex-column pb-0">
     <v-text-field
       class="text-h6"
       outlined

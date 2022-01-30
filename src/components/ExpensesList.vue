@@ -1,8 +1,8 @@
 <template>
   <div>
     <section>
-      <draggable v-model="basicExpenses" v-bind="dragOptions1" @start="drag = true" @end="drag = false" class="main-list">
-        <transition-group type="transition" :name="!drag ? 'flip-list' : null">
+      <draggable v-model="basicExpenses" v-bind="dragOptions1" @start="drag = true" @end="drag = false">
+        <transition-group type="transition" :name="!drag ? 'flip-list' : null" class="main-list">
           <ExpenseItem
             v-for="(expense, index) in basicExpenses"
             :id="expense.id"
@@ -57,7 +57,9 @@ export default {
       },
       set(value) {
         this.$store.commit("setBasicExpenses", value);
-        this.$store.commit("setFolders", this.folders);
+        this.$nextTick(() => {
+          this.$store.commit("setFolders", this.folders);
+        });
       }
     },
     folders: {
@@ -97,6 +99,7 @@ export default {
 
 <style scoped>
 .main-list {
+  display: block;
   min-height: 20px;
 }
 
