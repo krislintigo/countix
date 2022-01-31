@@ -1,5 +1,4 @@
 import LocalStorageService from '@/services/localStorage.service';
-import chartData from '@/data/chartData';
 
 export default {
   state: {
@@ -12,10 +11,6 @@ export default {
     netSalary: (state) => +(state.salary - (state.taxes / 100) * state.salary).toFixed(1),
     freeMoney: (state, getters) => +(getters.netSalary - getters.plannedExpenses).toFixed(1),
     freeMoneyPercent: (state, getters) => +((getters.freeMoney / getters.netSalary) * 100).toFixed(0),
-    options: (state, getters) => ({
-      labels: getters.labels,
-      ...chartData,
-    }),
   },
   mutations: {
     setSalary(state, salary) {
@@ -26,10 +21,6 @@ export default {
       state.taxes = taxes;
       LocalStorageService.setItem('taxes', taxes);
     },
-    setExpensesAndFolders(state, getters) {
-      LocalStorageService.setObject('basicExpenses', state.basicExpenses);
-      LocalStorageService.setObject('folders', getters.folders);
-    },
   },
   actions: {
     setSalary({ commit }, salary) {
@@ -37,9 +28,6 @@ export default {
     },
     setTaxes({ commit }, taxes) {
       commit('setTaxes', taxes);
-    },
-    setExpensesAndFolders({ commit, getters }) {
-      commit('setExpensesAndFolders', getters);
     },
   },
 };
