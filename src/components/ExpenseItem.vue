@@ -29,7 +29,7 @@
           </v-btn>
         </v-list-item>
         <v-list-item class="justify-center">
-          <v-switch v-model="expense.considered" @change="switchExpense" label="Switch"></v-switch>
+          <v-switch v-model="expense.considered" @change="switchExpense" color="secondary" label="Switch"></v-switch>
         </v-list-item>
       </v-list>
     </v-menu>

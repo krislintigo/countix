@@ -1,7 +1,7 @@
 <template>
   <div>
     <section>
-      <draggable v-model="basicExpenses" v-bind="dragOptions1" @start="drag = true" @end="drag = false">
+      <draggable v-model="basicExpenses" v-bind="dragOptions" group="expenses" @start="drag = true" @end="drag = false">
         <transition-group type="transition" :name="!drag ? 'flip-list' : null" class="main-list">
           <ExpenseItem
             v-for="expense in basicExpenses"
@@ -13,7 +13,7 @@
       </draggable>
     </section>
     <v-expansion-panels popout multiple class="mb-3 d-block">
-      <draggable v-model="folders" v-bind="dragOptions2" @start="drag = true" @end="drag = false">
+      <draggable v-model="folders" v-bind="dragOptions" group="folders" @start="drag = true" @end="drag = false">
         <transition-group type="transition" :name="!drag ? 'flip-list' : null">
           <v-expansion-panel v-for="(folder) in folders" :key="folder.id" class="list-group-item">
             <v-expansion-panel-header class="text-h5" disable-icon-rotate>
@@ -48,7 +48,7 @@
               </template>
             </v-expansion-panel-header>
             <v-expansion-panel-content>
-              <draggable v-model="folder.expenses" v-bind="dragOptions1" @start="drag = true"
+              <draggable v-model="folder.expenses" v-bind="dragOptions" group="expenses" @start="drag = true"
                          @end="updateFolders" @add="updateFolders"
               >
                 <ExpenseItem
@@ -98,20 +98,13 @@ export default {
         this.$store.commit("setFolders", value);
       }
     },
-    dragOptions1() {
-      return {
-        animation: 200,
-        group: 'expenses',
-        ghostClass: 'my-ghost',
+    dragOptions: () => ({
+      animation: 200,
+      ghostClass: 'my-ghost',
+      setData(dataTransfer) {
+        dataTransfer.setDragImage(new Image(), 0, 0);
       }
-    },
-    dragOptions2() {
-      return {
-        animation: 200,
-        group: 'folders',
-        ghostClass: 'my-ghost',
-      }
-    }
+    }),
   },
   methods: {
     expenseAmountByFolder(folderId) {
