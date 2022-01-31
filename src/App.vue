@@ -3,11 +3,11 @@
     <AppBar />
     <v-main class="mt-3">
       <v-row justify="space-around">
-        <v-col cols="4">
+        <v-col cols="11" class="col-md-4">
           <SalaryInputs />
           <BasicExpenses/>
         </v-col>
-        <v-col cols="5">
+        <v-col class="col-md-5">
           <DonutChart />
           <ExpenseStatistics />
         </v-col>
