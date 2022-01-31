@@ -12,7 +12,7 @@
         </transition-group>
       </draggable>
     </section>
-    <v-expansion-panels popout multiple class="mb-3 d-block">
+    <v-expansion-panels popout multiple class="d-block">
       <draggable v-model="folders" v-bind="dragOptions" group="folders" @start="drag = true" @end="drag = false">
         <transition-group type="transition" :name="!drag ? 'flip-list' : null">
           <v-expansion-panel v-for="(folder) in folders" :key="folder.id" class="list-group-item">
@@ -48,6 +48,14 @@
               </template>
             </v-expansion-panel-header>
             <v-expansion-panel-content>
+              <span class="mb-0 text-body-1">
+                Payed: <span class="text-h6 green--text text--darken-1">{{payedAmountByFolder(folder.id)}}$</span>
+              </span>
+              <v-divider></v-divider>
+              <span class="mb-0 text-body-1">
+                Considered: <span class="text-h6 cyan--text text--darken-1">{{consideredAmountByFolder(folder.id)}}$</span>
+              </span>
+              <v-divider class="mb-5"></v-divider>
               <draggable v-model="folder.expenses" v-bind="dragOptions" group="expenses" @start="drag = true"
                          @end="updateFolders" @add="updateFolders"
               >
@@ -100,6 +108,8 @@ export default {
     },
     dragOptions: () => ({
       animation: 200,
+      delay: 100,
+      delayOnTouchOnly: true,
       ghostClass: 'my-ghost',
       setData(dataTransfer) {
         dataTransfer.setDragImage(new Image(), 0, 0);
@@ -111,6 +121,16 @@ export default {
       return this.folders
         .find(folder => folder.id === folderId)
         .expenses.reduce((acc, expense) => acc + expense.amount, 0);
+    },
+    payedAmountByFolder(folderId) {
+      return this.folders
+        .find(folder => folder.id === folderId)
+        .expenses.reduce((acc, expense) => acc + (expense.payed ? expense.amount : 0), 0);
+    },
+    consideredAmountByFolder(folderId) {
+      return this.folders
+        .find(folder => folder.id === folderId)
+        .expenses.reduce((acc, expense) => acc + (expense.considered ? expense.amount : 0), 0);
     },
     updateFolders() {
       this.drag = false;

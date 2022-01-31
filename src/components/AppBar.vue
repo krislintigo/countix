@@ -15,13 +15,21 @@
           </template>
           <span>Reset paid</span>
         </v-tooltip>
-        <v-avatar color="teal">
-          <v-btn fab color="orange darken-1">
-            <v-icon dark>
-              mdi-account
-            </v-icon>
-          </v-btn>
-        </v-avatar>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-avatar>
+              <v-btn
+                fab color="transparent"
+                v-bind="attrs" v-on="on"
+              >
+                <v-icon>
+                  mdi-account
+                </v-icon>
+              </v-btn>
+            </v-avatar>
+          </template>
+          <span>Profile</span>
+        </v-tooltip>
       </v-col>
     </v-row>
   </v-app-bar>
