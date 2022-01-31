@@ -31,7 +31,7 @@ export default {
       LocalStorageService.setObject('basicExpenses', basicExpenses);
     },
     addBasicExpense(state, expense) {
-      state.basicExpenses.push({ ...expense, considered: true, id: Date.now() });
+      state.basicExpenses.push({ ...expense, considered: true, payed: false, id: Date.now() });
       LocalStorageService.setObject('basicExpenses', state.basicExpenses);
     },
     updateBasicExpense(state, {expense, getters}) {
@@ -60,6 +60,18 @@ export default {
       LocalStorageService.setObject('basicExpenses', state.basicExpenses);
       LocalStorageService.setObject('folders', getters.folders);
     },
+    resetPaid(state, getters) {
+      state.basicExpenses.forEach((expense) => {
+        expense.payed = false;
+      });
+      getters.folders.forEach((folder) => {
+        folder.expenses.forEach((expense) => {
+          expense.payed = false;
+        });
+      });
+      LocalStorageService.setObject('basicExpenses', state.basicExpenses);
+      LocalStorageService.setObject('folders', getters.folders);
+    },
   },
   actions: {
     addBasicExpense({ commit }, expense) {
@@ -70,6 +82,9 @@ export default {
     },
     deleteBasicExpense({ commit, getters }, id) {
       commit('deleteBasicExpense', {id, getters});
+    },
+    resetPaid({ commit, getters }) {
+      commit('resetPaid', getters);
     },
   }
 }

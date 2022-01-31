@@ -3,7 +3,7 @@
     class="mb-3 list-group-item"
   >
     <v-card-title>{{ expense.name }}</v-card-title>
-    <v-card-subtitle>{{ expense.amount }}$</v-card-subtitle>
+    <v-card-subtitle :style="{color: expense.payed ? 'green' : 'inherit'}">{{ expense.amount }}$</v-card-subtitle>
     <v-menu offset-y close-on-content-click>
       <template v-slot:activator="{ on, attrs }">
         <v-btn
@@ -29,7 +29,10 @@
           </v-btn>
         </v-list-item>
         <v-list-item class="justify-center">
-          <v-switch v-model="expense.considered" @change="switchExpense" color="secondary" label="Switch"></v-switch>
+          <v-switch v-model="expense.considered" @change="saveAll" color="cyan" label="Switch" class="mb-0"></v-switch>
+        </v-list-item>
+        <v-list-item class="justify-center">
+          <v-switch v-model="expense.payed" @change="saveAll" color="green" label="Payed" class="mt-0 mb-0"></v-switch>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -56,7 +59,7 @@ export default {
     deleteExpense(id) {
       this.$store.dispatch('deleteBasicExpense', id);
     },
-    switchExpense() {
+    saveAll() {
       this.$store.dispatch('setExpensesAndFolders');
     },
   }
@@ -71,5 +74,8 @@ export default {
 }
 .list-group-item {
   cursor: move;
+}
+.green {
+  color: green;
 }
 </style>
