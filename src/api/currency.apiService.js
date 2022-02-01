@@ -1,3 +1,14 @@
+const codes = {
+  EUR: {
+    code: 451,
+    name: 'Euro',
+  },
+  RUB: {
+    code: 456,
+    name: 'Russian Ruble',
+  }
+}
+
 export default class CurrencyApiService {
   static async getCountries() {
     const countries = []
@@ -8,20 +19,15 @@ export default class CurrencyApiService {
       abbr: 'BYN',
       value: usdData.Cur_OfficialRate / usdData.Cur_Scale,
     })
-    const eurRaw = await fetch('https://www.nbrb.by/api/exrates/rates/451');
-    const eurData = await eurRaw.json();
-    countries.push({
-      name: 'Euro',
-      abbr: eurData.Cur_Abbreviation,
-      value: usdData.Cur_OfficialRate / eurData.Cur_OfficialRate * eurData.Cur_Scale,
-    })
-    const rubRaw = await fetch('https://www.nbrb.by/api/exrates/rates/456');
-    const rubData = await rubRaw.json();
-    countries.push({
-      name: 'Russian ruble',
-      abbr: rubData.Cur_Abbreviation,
-      value: usdData.Cur_OfficialRate / rubData.Cur_OfficialRate * rubData.Cur_Scale,
-    })
+    for (const code in codes) {
+      const raw = await fetch(`https://www.nbrb.by/api/exrates/rates/${codes[code].code}`);
+      const data = await raw.json();
+      countries.push({
+        name: codes[code].name,
+        abbr: code,
+        value: usdData.Cur_OfficialRate / data.Cur_OfficialRate * data.Cur_Scale,
+      })
+    }
     return countries
   }
 }
