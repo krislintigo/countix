@@ -1,13 +1,4 @@
-const codes = {
-  EUR: {
-    code: 451,
-    name: 'Euro',
-  },
-  RUB: {
-    code: 456,
-    name: 'Russian Ruble',
-  }
-}
+import codes from "@/data/exRatesCodes";
 
 export default class CurrencyApiService {
   static async getCountries() {
