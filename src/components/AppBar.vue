@@ -1,13 +1,13 @@
 <template>
   <v-app-bar color="primary" app dark>
     <v-row justify="space-between">
-      <v-col cols="4">
+      <v-col cols="6">
         <v-app-bar-title>
           <h1 class="text-h4 mt-1">Countix</h1>
         </v-app-bar-title>
       </v-col>
       <v-col cols="1" class="d-flex justify-end">
-        <v-menu offset-y>
+        <v-menu offset-y max-width="230">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
               icon
@@ -15,7 +15,7 @@
               v-bind="attrs"
               v-on="on"
             >
-              <v-icon>mdi-currency-usd</v-icon>
+              <v-icon>mdi-currency-eur</v-icon>
             </v-btn>
           </template>
           <ExchangeRate />

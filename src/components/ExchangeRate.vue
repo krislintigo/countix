@@ -30,7 +30,7 @@ export default {
       },
       currency: {
         abbr: '',
-        value: 0
+        value: ''
       },
     }
   },
@@ -38,13 +38,13 @@ export default {
     setUsdValue(value) {
       this.currency = {
         abbr: 'USD',
-        value
+        value: +value
       }
     },
     setOtherValue(value) {
       this.currency = {
         abbr: this.selected.abbr,
-        value
+        value: +value
       }
     },
   },
@@ -53,13 +53,13 @@ export default {
       if (!this.countries.length) return 0
       return this.currency.abbr === 'USD'
         ? this.currency.value
-        : this.currency.value / this.countries.find(country => country.abbr === this.selected.abbr)?.value
+        : +(this.currency.value / this.countries.find(country => country.abbr === this.selected.abbr).value).toFixed(2)
     },
     otherValue() {
       if (!this.countries.length) return 0
       return this.currency.abbr !== 'USD'
         ? this.currency.value
-        : this.currency.value * this.countries.find(country => country.abbr === this.selected.abbr)?.value
+        : +(this.currency.value * this.countries.find(country => country.abbr === this.selected.abbr).value).toFixed(2)
     }
   },
   async mounted() {
