@@ -14,14 +14,23 @@
           label="Expense name"
           :value="expenseData.name"
           @input.native="$emit('setName', $event.target.value)"
-        ></v-text-field>
+        />
         <v-text-field
           outlined
           label="Expense amount"
           prefix="$"
           :value="expenseData.amount"
           @input.native="$emit('setAmount', $event.target.value)"
-        ></v-text-field>
+        />
+        <v-textarea
+          outlined
+          label="Expense description"
+          rows="4"
+          auto-grow
+          no-resize
+          :value="expenseData.description"
+          @input.native="$emit('setDescription', $event.target.value)"
+        />
       </v-col>
       <v-card-actions>
         <v-spacer></v-spacer>

@@ -3,7 +3,13 @@
     class="mb-3 list-group-item"
   >
     <v-card-title>{{ expense.name }}</v-card-title>
-    <v-card-subtitle :style="{color: expense.payed ? 'green' : 'inherit'}">{{ expense.amount }}$</v-card-subtitle>
+    <v-card-subtitle
+      :class="expense.description ? 'pb-0' : 'pb-4'"
+      :style="{color: expense.payed ? 'green' : 'inherit'}"
+    >
+      {{ expense.amount }}$
+    </v-card-subtitle>
+    <v-card-subtitle v-if="expense.description" class="pt-1">{{ expense.description }}</v-card-subtitle>
     <v-menu offset-y close-on-content-click>
       <template v-slot:activator="{ on, attrs }">
         <v-btn

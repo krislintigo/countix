@@ -53,6 +53,7 @@
       @setAppending="setAppendingExpense"
       @setName="setExpenseName"
       @setAmount="setExpenseAmount"
+      @setDescription="setExpenseDescription"
       @save="saveExpenseInfo"
       @close="closeExpenseDialog"
     />
@@ -85,6 +86,7 @@ export default {
       expenseData: {
         name: '',
         amount: 0,
+        description: ''
       },
       folderData: {
         name: '',
@@ -100,6 +102,9 @@ export default {
     },
     setExpenseAmount(amount) {
       this.expenseData.amount = +amount;
+    },
+    setExpenseDescription(description) {
+      this.expenseData.description = description;
     },
     setFolderName(name) {
       this.folderData.name = name;

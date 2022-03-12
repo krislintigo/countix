@@ -39,6 +39,7 @@ export default {
         if (item.id === expense.id) {
           item.name = expense.name;
           item.amount = expense.amount;
+          item.description = expense.description;
         }
       });
       getters.folders.forEach((folder) => {
@@ -46,6 +47,7 @@ export default {
           if (item.id === expense.id) {
             item.name = expense.name;
             item.amount = expense.amount;
+            item.description = expense.description;
           }
         });
       });
