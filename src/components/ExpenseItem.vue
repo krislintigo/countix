@@ -1,13 +1,14 @@
 <template>
   <v-card class="mb-3 list-group-item">
-    <v-card-title>{{ expense.name }}</v-card-title>
+    <v-card-title style="max-width: calc(100% - 150px)">
+      {{ expense.name }}
+    </v-card-title>
     <v-card-text :class="expense.description ? 'pb-0' : 'pb-4'">
       ${{ expense.amount }}
     </v-card-text>
     <v-card-subtitle v-if="expense.description" class="pt-2 pb-4">
       {{ expense.description }}
     </v-card-subtitle>
-    <v-col class="top-right"> </v-col>
     <v-menu close-on-content-click>
       <template v-slot:activator="{ props }">
         <v-row class="top-right" align="center">
@@ -50,7 +51,7 @@
 
 <script setup lang="ts">
 import { computed, defineProps, watchEffect } from 'vue';
-import { useExpenseStore } from '@/stores/expense.store';
+import { IExpense, useExpenseStore } from '@/stores/expense.store';
 
 const props = defineProps<{ id: number }>();
 
@@ -71,7 +72,7 @@ const remove = (id: number) => expenseStore.deleteExpense(id);
   right: 15px;
 }
 .list-group-item {
-  cursor: move;
+  cursor: grab;
 }
 .green {
   color: green;

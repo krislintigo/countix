@@ -41,7 +41,7 @@
           @end="drag = false"
         >
           <template #item="{ element: folder }">
-            <v-expansion-panel class="list-group-item mt-3">
+            <v-expansion-panel class="mt-3">
               <v-expansion-panel-title class="text-h5" disable-icon-rotate>
                 {{ folder.name }} (${{ folderStatistic(folder.id).all }})
                 <template #actions>
@@ -80,14 +80,19 @@
                 <span class="mb-0 text-body-1">
                   Оплаченные:
                   <span class="text-h6 text-success">
-                    {{ folderStatistic(folder.id).payed }}$
+                    ${{ folderStatistic(folder.id).payed }}
                   </span>
+                  ( ещё не оплачено
+                  <span class="text-h6 text-warning">
+                    ${{ folderStatistic(folder.id).pending }}
+                  </span>
+                  )
                 </span>
                 <v-divider />
                 <span class="mb-0 text-body-1">
                   Учитываемые:
                   <span class="text-h6 text-info">
-                    {{ folderStatistic(folder.id).considered }}$
+                    ${{ folderStatistic(folder.id).considered }}
                   </span>
                 </span>
                 <v-divider class="mb-5"></v-divider>
@@ -150,7 +155,7 @@ const folders = computed({
 
 const folderStatistic = (folderId: number) => {
   const folder = folders.value.find((folder) => folder.id === folderId);
-  if (!folder) return { all: 0, payed: 0, considered: 0 };
+  if (!folder) return { all: 0, payed: 0, considered: 0, pending: 0 };
   return {
     all: folder.expenses.reduce((acc, expense) => acc + expense.amount, 0),
     payed: folder.expenses.reduce(
@@ -159,6 +164,11 @@ const folderStatistic = (folderId: number) => {
     ),
     considered: folder.expenses.reduce(
       (acc, expense) => acc + (expense.considered ? expense.amount : 0),
+      0
+    ),
+    pending: folder.expenses.reduce(
+      (acc, expense) =>
+        acc + (expense.considered && !expense.payed ? expense.amount : 0),
       0
     ),
   };
@@ -176,10 +186,6 @@ const deleteFolder = (folderId: number) => folderStore.deleteFolder(folderId);
 .main-list {
   display: block;
   min-height: 20px;
-}
-
-.list-group-item {
-  cursor: move;
 }
 
 .flip-list-move {
