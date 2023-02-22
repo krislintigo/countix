@@ -1,49 +1,39 @@
 <template>
   <v-col class="d-flex flex-column pb-0">
     <v-text-field
-      class="text-h6"
-      outlined
-      label="Salary"
+      v-model.number="salary"
+      type="number"
+      min="0"
+      variant="outlined"
+      label="Зарплата"
       prefix="$"
-      type="number"
-      v-model="salary"
-      ></v-text-field>
+    />
     <v-text-field
-      class="text-h6"
-      outlined
-      label="Taxes"
-      prefix="%"
+      v-model.number="taxes"
       type="number"
-      v-model="taxes"
-    ></v-text-field>
+      min="0"
+      variant="outlined"
+      label="Налоги"
+      prefix="%"
+    />
   </v-col>
 </template>
 
-<script>
+<script setup lang="ts">
+import { useMoneyStore } from '@/stores/money.store';
+import { computed } from 'vue';
 
-export default {
-  name: 'SalaryInputs',
-  computed: {
-    salary: {
-      get() {
-        return this.$store.getters.salary;
-      },
-      set(value) {
-        this.$store.commit('setSalary', value);
-      }
-    },
-    taxes: {
-      get() {
-        return this.$store.getters.taxes;
-      },
-      set(value) {
-        this.$store.commit('setTaxes', value);
-      }
-    }
-  }
-};
+const moneyStore = useMoneyStore();
+
+const salary = computed({
+  get: () => moneyStore.salary,
+  set: (value) => moneyStore.setSalary(value),
+});
+
+const taxes = computed({
+  get: () => moneyStore.taxes,
+  set: (value) => moneyStore.setTaxes(value),
+});
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

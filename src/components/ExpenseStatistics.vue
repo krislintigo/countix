@@ -1,25 +1,29 @@
 <template>
   <div class="mt-10 pa-2">
-    <p class="text-h5">Net salary: <strong class="text-h4">{{netSalary}}$</strong></p>
-    <p class="text-h5">Planned expenses: <strong class="text-h4">{{plannedExpenses}}$</strong></p>
-    <p class="text-h5">Free money: <strong class="text-h4">{{freeMoney}}$ ({{freeMoneyPercent}}%)</strong></p>
+    <p class="text-h5">
+      Чистый доход: <strong class="text-h4">{{ netSalary }}$</strong>
+    </p>
+    <p class="text-h5 mt-1">
+      Запланированные засходы:
+      <strong class="text-h4">{{ plannedExpensesAmount }}$</strong>
+    </p>
+    <p class="text-h5 mt-2">
+      Свободные деньги:
+      <strong class="text-h4">
+        {{ freeMoney }}$ ({{ freeMoneyPercent }}%)
+      </strong>
+    </p>
   </div>
 </template>
 
-<script>
-import { mapGetters } from 'vuex';
+<script setup lang="ts">
+import { useMoneyStore } from '@/stores/money.store';
+import { storeToRefs } from 'pinia';
 
-export default {
-  name: 'ExpenseStatistics',
-  computed: mapGetters([
-    'netSalary',
-    'plannedExpenses',
-    'freeMoney',
-    'freeMoneyPercent',
-  ]),
-};
+const moneyStore = useMoneyStore();
+
+const { netSalary, freeMoney, freeMoneyPercent, plannedExpensesAmount } =
+  storeToRefs(moneyStore);
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

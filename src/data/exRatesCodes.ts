@@ -1,4 +1,4 @@
-export default {
+export const codes = {
   EUR: {
     code: 451,
     name: 'Euro',
@@ -7,4 +7,4 @@ export default {
     code: 456,
     name: 'Russian Ruble',
   },
-}
+};
