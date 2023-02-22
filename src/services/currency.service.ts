@@ -1,6 +1,6 @@
 import { codes } from '@/data/exRatesCodes';
 
-interface ICountry {
+export interface IRate {
   name: string;
   abbr: string;
   value: number;
@@ -8,11 +8,11 @@ interface ICountry {
 
 export default class CurrencyService {
   static async getCountries() {
-    const countries: ICountry[] = [];
+    const rates: IRate[] = [];
     const usdRaw = await fetch('https://www.nbrb.by/api/exrates/rates/431');
     const usdData = await usdRaw.json();
-    countries.push({
-      name: 'Belorussian ruble',
+    rates.push({
+      name: 'Рубль',
       abbr: 'BYN',
       value: usdData.Cur_OfficialRate / usdData.Cur_Scale,
     });
@@ -23,13 +23,13 @@ export default class CurrencyService {
         }`
       );
       const data = await raw.json();
-      countries.push({
+      rates.push({
         name: codes[code as keyof typeof codes].name,
         abbr: code,
         value:
           (usdData.Cur_OfficialRate / data.Cur_OfficialRate) * data.Cur_Scale,
       });
     }
-    return countries;
+    return rates;
   }
 }

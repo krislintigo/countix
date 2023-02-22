@@ -2,13 +2,12 @@
 // @ts-nocheck
 
 import { defineStore } from 'pinia';
-import LocalStorageService from '@/services/localStorage.service';
 import { useExpenseStore } from '@/stores/expense.store';
 
 export const useMoneyStore = defineStore('money', {
   state: () => ({
-    salary: LocalStorageService.getNumber('salary'),
-    taxes: LocalStorageService.getNumber('taxes'),
+    salary: 0,
+    taxes: 0,
   }),
   getters: {
     netSalary(state): number {

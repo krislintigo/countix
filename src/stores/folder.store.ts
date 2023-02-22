@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import LocalStorageService from '@/services/localStorage.service';
 import { IExpense } from '@/stores/expense.store';
 
 export interface IFolderData {
@@ -14,7 +13,7 @@ export interface IFolder {
 
 export const useFolderStore = defineStore('folder', {
   state: () => ({
-    folders: LocalStorageService.getArray('folders') as IFolder[],
+    folders: [] as IFolder[],
   }),
   actions: {
     setFolders(folders: IFolder[]) {

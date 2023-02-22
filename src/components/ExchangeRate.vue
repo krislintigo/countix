@@ -1,93 +1,77 @@
 <template>
-  <v-col class="fix" @click.stop>
-    <h3 class="text-h6 mb-3">Exchange rate</h3>
+  <v-card :ripple="false" class="pa-3" @click.stop>
+    <v-card-title>Курсы валют</v-card-title>
     <v-text-field
-      outlined
+      v-model.number="USDValue"
       type="number"
       label="USD"
-      :value="USDValue"
-      @input="setUSDValue"
-    ></v-text-field>
+      variant="outlined"
+    />
     <v-text-field
-      outlined
+      v-model.number="otherValue"
       type="number"
-      :label="state.selected.abbr"
-      :value="otherValue"
-      @input="setOtherValue"
-    ></v-text-field>
+      variant="outlined"
+      :label="selected.abbr"
+    />
     <v-select
-      v-model="state.selected"
-      label="Country"
-      :items="state.countries"
-      item-text="name"
+      v-model="selected"
+      label="Валюта"
+      variant="outlined"
+      :items="rates"
+      item-title="name"
       item-value="name"
       return-object
-    >
-    </v-select>
-  </v-col>
+    />
+  </v-card>
 </template>
 
 <script setup lang="ts">
-import CurrencyService from '@/services/currency.service';
-import { computed, onMounted, reactive } from 'vue';
+import CurrencyService, { IRate } from '@/services/currency.service';
+import { computed, onMounted, reactive, ref } from 'vue';
+
+const rates = ref<IRate[]>([]);
 
 const state = reactive({
-  countries: [],
-  selected: {
-    name: '',
-    abbr: '',
-    value: 0,
+  abbr: '',
+  value: 0,
+});
+const selected = reactive({
+  name: '',
+  abbr: '',
+  value: 0,
+});
+
+const USDValue = computed({
+  get: () => {
+    if (!rates.value.length) return 0;
+    return state.abbr === 'USD' ? state.value : tryConvert();
   },
-  currency: {
-    abbr: '',
-    value: 0,
+  set: (value) => {
+    Object.assign(state, { abbr: 'USD', value });
   },
 });
 
-const USDValue = computed(() => {
-  if (!state.countries.length) return 0;
-  return state.currency.abbr === 'USD'
-    ? state.currency.value
-    : +(
-        state.currency.value /
-        state.countries.find((country) => country.abbr === state.selected.abbr)
-          .value
-      ).toFixed(2);
+const otherValue = computed({
+  get: () => {
+    if (!rates.value.length) return 0;
+    return state.abbr === 'USD' ? tryConvert() : state.value;
+  },
+  set: (value) => {
+    Object.assign(state, { abbr: selected.abbr, value });
+  },
 });
 
-const otherValue = computed(() => {
-  if (!state.countries.length) return 0;
-  return state.currency.abbr !== 'USD'
-    ? state.currency.value
-    : +(
-        state.currency.value *
-        state.countries.find((country) => country.abbr === state.selected.abbr)
-          .value
-      ).toFixed(2);
-});
-
-const setUSDValue = (value: string) => {
-  state.currency = {
-    abbr: 'USD',
-    value: +value,
-  };
-};
-
-const setOtherValue = (value: string) => {
-  state.currency = {
-    abbr: state.selected.abbr,
-    value: +value,
-  };
+const tryConvert = () => {
+  const rate =
+    rates.value.find((rate) => rate.abbr === selected.abbr)?.value || 0;
+  if (state.abbr === selected.abbr) return +(state.value / rate).toFixed(2);
+  return +(state.value * rate).toFixed(2);
 };
 
 onMounted(async () => {
-  state.countries = await CurrencyService.getCountries();
-  state.selected = state.countries[0];
+  rates.value = await CurrencyService.getCountries();
+  Object.assign(selected, rates.value[0]);
 });
 </script>
 
-<style scoped>
-.fix {
-  background: white;
-}
-</style>
+<style scoped></style>

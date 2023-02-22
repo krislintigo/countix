@@ -1,10 +1,10 @@
 export const codes = {
   EUR: {
     code: 451,
-    name: 'Euro',
+    name: 'Евро',
   },
   RUB: {
     code: 456,
-    name: 'Russian Ruble',
+    name: 'Российский рубль',
   },
 };

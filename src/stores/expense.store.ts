@@ -2,7 +2,6 @@
 // @ts-nocheck
 
 import { defineStore } from 'pinia';
-import LocalStorageService from '@/services/localStorage.service';
 import { useFolderStore } from '@/stores/folder.store';
 
 export interface IExpenseData {
@@ -22,7 +21,7 @@ export interface IExpense {
 
 export const useExpenseStore = defineStore('expense', {
   state: () => ({
-    expenses: LocalStorageService.getArray('expenses') as IExpense[],
+    expenses: [] as IExpense[],
   }),
   getters: {
     flatExpenses(state): IExpense[] {
@@ -100,8 +99,6 @@ export const useExpenseStore = defineStore('expense', {
           expense.payed = false;
         });
       });
-      LocalStorageService.setObject('expenses', this.expenses);
-      LocalStorageService.setObject('folders', folderStore.folders);
     },
   },
 });

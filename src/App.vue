@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <AppBar />
-    <v-main class="mt-10 mb-16">
+    <v-main v-if="authStore.user" class="mt-10 mb-16">
       <v-row justify="space-around" class="flex-sm-row-reverse">
         <v-col cols="12" class="v-col-lg-6">
           <v-row justify="center">
@@ -21,34 +21,34 @@
         </v-col>
       </v-row>
     </v-main>
+    <v-main v-else>
+      <v-card class="ma-8 pa-5">
+        <h2 class="text-center">Пожалуйста, выполните вход в приложение!</h2>
+      </v-card>
+    </v-main>
   </v-app>
 </template>
 
 <script setup lang="ts">
+import throttle from 'lodash/throttle';
 import SalaryInputs from '@/components/SalaryInputs';
 import BasicExpenses from '@/components/BasicExpenses';
 import ExpenseStatistics from '@/components/ExpenseStatistics';
 import DonutChart from '@/components/DonutChart';
 import AppBar from '@/components/AppBar';
 import { useMoneyStore } from '@/stores/money.store';
-import LocalStorageService from '@/services/localStorage.service';
 import { useFolderStore } from '@/stores/folder.store';
 import { useExpenseStore } from '@/stores/expense.store';
+import { useAuthStore } from '@/stores/auth.store';
 
-useMoneyStore().$subscribe((_, state) => {
-  LocalStorageService.setItem('salary', state.salary);
-  LocalStorageService.setItem('taxes', state.taxes);
-});
+const authStore = useAuthStore();
+authStore.login(null);
 
-useFolderStore().$subscribe((_, state) => {
-  LocalStorageService.setObject('folders', state.folders);
-});
+useMoneyStore().$subscribe(throttle(authStore.push, 3000));
 
-useExpenseStore().$subscribe((_, state) => {
-  const folderStore = useFolderStore();
-  LocalStorageService.setObject('expenses', state.expenses);
-  LocalStorageService.setObject('folders', folderStore.folders);
-});
+useFolderStore().$subscribe(throttle(authStore.push, 3000));
+
+useExpenseStore().$subscribe(throttle(authStore.push, 3000));
 </script>
 
 <style>
