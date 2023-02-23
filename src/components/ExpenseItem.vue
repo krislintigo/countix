@@ -13,35 +13,28 @@
       {{ expense.description }}
     </v-card-subtitle>
     <v-row class="top-right" align="center">
-      <v-menu location="bottom left">
-        <template v-slot:activator="{ props }">
-          <v-btn
-            variant="text"
-            density="comfortable"
-            icon
-            v-bind="props"
-            class="mr-4"
+      <v-btn variant="text" density="comfortable" icon class="mr-4">
+        <v-icon>mdi-currency-usd</v-icon>
+        <v-menu activator="parent" location="bottom left">
+          <v-slider
+            v-model="expense.payed"
+            color="success"
+            min="0"
+            max="1"
+            step="0.05"
+            thumb-label
+            hide-details
+            style="width: 115px"
           >
-            <v-icon>mdi-currency-usd</v-icon>
-          </v-btn>
-        </template>
-        <v-slider
-          v-model="expense.payed"
-          color="success"
-          min="0"
-          max="1"
-          step="0.05"
-          thumb-label
-          hide-details
-          style="width: 120px"
-        >
-          <template v-slot:thumb-label="{ modelValue }">
-            <v-row style="width: 120px" justify="center">
-              Оплачено: {{ (modelValue * 100).toFixed(0) }}%
-            </v-row>
-          </template>
-        </v-slider>
-      </v-menu>
+            <template #thumb-label="{ modelValue }">
+              <v-row style="width: 120px" justify="center">
+                Оплачено: {{ (modelValue * 100).toFixed(0) }}%
+              </v-row>
+            </template>
+          </v-slider>
+        </v-menu>
+      </v-btn>
+
       <v-switch
         v-model="expense.considered"
         color="primary"
@@ -49,27 +42,26 @@
         class="mr-4"
         hide-details
       />
-      <v-menu close-on-content-click>
-        <template v-slot:activator="{ props }">
-          <v-btn icon variant="text" size="40" v-bind="props">
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item>
-            <v-btn variant="plain" @click="$emit('edit', expense)">
-              <v-icon>mdi-pen</v-icon>
-              ⁣⁣Edit
-            </v-btn>
-          </v-list-item>
-          <v-list-item>
-            <v-btn variant="plain" @click="remove(expense.id)">
-              <v-icon>mdi-delete</v-icon>
-              ⁣⁣Delete
-            </v-btn>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+
+      <v-btn icon variant="text" size="40">
+        <v-icon>mdi-dots-vertical</v-icon>
+        <v-menu activator="parent" close-on-content-click>
+          <v-list>
+            <v-list-item>
+              <v-btn variant="plain" @click="$emit('edit', expense)">
+                <v-icon>mdi-pen</v-icon>
+                ⁣⁣Edit
+              </v-btn>
+            </v-list-item>
+            <v-list-item>
+              <v-btn variant="plain" @click="remove(expense.id)">
+                <v-icon>mdi-delete</v-icon>
+                ⁣⁣Delete
+              </v-btn>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </v-btn>
     </v-row>
   </v-card>
 </template>
