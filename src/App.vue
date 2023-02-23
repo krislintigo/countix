@@ -61,6 +61,10 @@ useExpenseStore().$subscribe(throttle(authStore.push, 3000));
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400&family=Rubik:wght@300;400&display=swap');
 * {
-  font-family: Rubik, Avenir, Helvetica, Arial, sans-serif !important;
+  font-family: Rubik, Avenir, sans-serif !important;
+}
+
+.v-application [class*='text-'] {
+  font-family: Rubik, Avenir, sans-serif !important;
 }
 </style>

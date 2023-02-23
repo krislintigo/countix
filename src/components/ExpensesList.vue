@@ -25,8 +25,7 @@
         </draggable>
       </transition-group>
     </section>
-    {{ expanded }}
-    <v-expansion-panels v-model="expanded" popout multiple class="d-block">
+    <v-expansion-panels popout multiple class="d-block">
       <transition-group
         tag="div"
         type="transition"
@@ -42,8 +41,8 @@
           @end="drag = false"
         >
           <template #item="{ element: folder }">
-            <v-expansion-panel class="mt-3" @group:selected="expandPanel">
-              <v-expansion-panel-title class="text-h5" disable-icon-rotate>
+            <v-expansion-panel class="mt-3">
+              <v-expansion-panel-title class="text-h6" disable-icon-rotate>
                 {{ folder.name }} (${{ folderStatistic(folder.id).all }})
                 <template #actions>
                   <v-menu offset-y>
@@ -125,7 +124,7 @@
 <script setup lang="ts">
 import draggable from 'vuedraggable';
 import ExpenseItem from '@/components/ExpenseItem';
-import { computed, ref, watchEffect } from 'vue';
+import { computed, ref } from 'vue';
 import { useExpenseStore } from '@/stores/expense.store';
 import { useFolderStore } from '@/stores/folder.store';
 
@@ -143,11 +142,6 @@ const expenseStore = useExpenseStore();
 const folderStore = useFolderStore();
 
 const drag = ref(false);
-
-const expanded = ref([]);
-const expandPanel = () => {
-  alert('exp');
-};
 
 const expenses = computed({
   get: () => expenseStore.expenses,

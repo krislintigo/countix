@@ -55,7 +55,6 @@ const chartData = computed<ChartData>(() => ({
         '#EA3546',
         '#43BCCD',
       ],
-      // data: [40, 20, 80, 10],
       data: expenseStore.data,
     },
   ],

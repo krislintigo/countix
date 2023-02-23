@@ -28,6 +28,14 @@ export const useMoneyStore = defineStore('money', {
         0
       );
     },
+    pendingExpensesAmount(): number {
+      const expenseStore = useExpenseStore();
+      return expenseStore.consideredExpenses.reduce(
+        (acc, expense) =>
+          acc + +(expense.amount - expense.payed * expense.amount).toFixed(0),
+        0
+      );
+    },
   },
   actions: {
     setSalary(salary: number) {
