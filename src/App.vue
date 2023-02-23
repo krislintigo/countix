@@ -1,10 +1,10 @@
 <template>
-  <v-app>
+  <v-app style="background: white">
     <AppBar />
-    <v-main v-if="authStore.user" class="mt-10 mb-16">
-      <v-row justify="space-around" class="flex-sm-row-reverse">
+    <v-main v-if="authStore.user" class="mt-10 pb-16">
+      <v-row justify="space-around" class="flex-sm-row-reverse" no-gutters>
         <v-col cols="12" class="v-col-lg-6">
-          <v-row justify="center">
+          <v-row justify="center" no-gutters>
             <v-col cols="11" class="v-col-md-9 v-col-sm-10">
               <DonutChart />
               <ExpenseStatistics />
@@ -12,7 +12,7 @@
           </v-row>
         </v-col>
         <v-col cols="12" class="v-col-lg-6">
-          <v-row justify="center">
+          <v-row justify="center" no-gutters>
             <v-col cols="11" class="v-col-md-9 v-col-sm-10">
               <SalaryInputs />
               <BasicExpenses />
