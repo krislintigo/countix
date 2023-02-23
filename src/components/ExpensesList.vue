@@ -25,7 +25,8 @@
         </draggable>
       </transition-group>
     </section>
-    <v-expansion-panels popout multiple class="d-block">
+    {{ expanded }}
+    <v-expansion-panels v-model="expanded" popout multiple class="d-block">
       <transition-group
         tag="div"
         type="transition"
@@ -141,6 +142,7 @@ const dragOptions = {
 const expenseStore = useExpenseStore();
 const folderStore = useFolderStore();
 
+const expanded = ref([]);
 const drag = ref(false);
 
 const expenses = computed({
