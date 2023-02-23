@@ -26,13 +26,7 @@
       </transition-group>
     </section>
     {{ expanded }}
-    <v-expansion-panels
-      v-model="expanded"
-      popout
-      multiple
-      class="d-block"
-      @click="expandPanel"
-    >
+    <v-expansion-panels v-model="expanded" popout multiple class="d-block">
       <transition-group
         tag="div"
         type="transition"
@@ -48,7 +42,7 @@
           @end="drag = false"
         >
           <template #item="{ element: folder }">
-            <v-expansion-panel class="mt-3">
+            <v-expansion-panel class="mt-3" @group:selected="expandPanel">
               <v-expansion-panel-title class="text-h5" disable-icon-rotate>
                 {{ folder.name }} (${{ folderStatistic(folder.id).all }})
                 <template #actions>
