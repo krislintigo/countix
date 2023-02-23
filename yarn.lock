@@ -1057,6 +1057,11 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
+"@juanelas/base64@^1.0.1":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@juanelas/base64/-/base64-1.0.5.tgz#abbda3f529947b4d9784619c4fa039a3f9b58399"
+  integrity sha512-gTIElNo4ohMcYUZzol/Hb6DYJzphxl0b1B4egJJ+JiqxqcOcWx4XLMAB+lhWuMsMX3uR1oc5hwPusU3lgc1FkQ==
+
 "@kurkle/color@^0.3.0":
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/@kurkle/color/-/color-0.3.2.tgz#5acd38242e8bde4f9986e7913c8fdf49d3aa199f"
@@ -2177,6 +2182,13 @@ big.js@^5.2.2:
   resolved "https://registry.yarnpkg.com/big.js/-/big.js-5.2.2.tgz#65f0af382f578bcdc742bd9c281e9cb2d7768328"
   integrity sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==
 
+bigint-conversion@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/bigint-conversion/-/bigint-conversion-2.3.0.tgz#dbe983a95dce817d9fd1e9944c3bfaeede9ec419"
+  integrity sha512-U4Yzg8ygZ3m78n9weKP/6NMxN/98Pdsw6YdnDYgQO8fffL7ila31fCZIy5lCMswr4kEcyl8bGHltcHT0QdG/MQ==
+  dependencies:
+    "@juanelas/base64" "^1.0.1"
+
 binary-extensions@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.2.0.tgz#75f502eeaf9ffde42fc98829645be4ea76bd9e2d"
@@ -2690,6 +2702,11 @@ cross-spawn@^7.0.1, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
+
+crypto-js@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
+  integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==
 
 css-declaration-sorter@^6.3.1:
   version "6.3.1"
@@ -4854,6 +4871,11 @@ path-type@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
+
+pbkdf2-hmac@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/pbkdf2-hmac/-/pbkdf2-hmac-1.1.0.tgz#33d851be8e3f830255fd5e079411a6af6c9713ac"
+  integrity sha512-tHlR1BqnuRX5No63r1u4Ll0fSxXMvBHhJ5JjVeYf/9nPOhTclozaMNFTMGO8f2CUmm7K1pe55d51OvvxoAxKdA==
 
 picocolors@^0.2.1:
   version "0.2.1"

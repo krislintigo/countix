@@ -15,7 +15,7 @@
     <v-menu close-on-content-click>
       <template v-slot:activator="{ props }">
         <v-row class="top-right" align="center">
-          <v-menu location="bottom center">
+          <v-menu location="bottom left">
             <template v-slot:activator="{ props }">
               <v-btn
                 variant="text"
@@ -29,13 +29,13 @@
             </template>
             <v-slider
               v-model="expense.payed"
-              style="width: 200px"
               color="success"
               min="0"
               max="1"
               step="0.05"
               thumb-label
               hide-details
+              style="width: 120px"
             >
               <template v-slot:thumb-label="{ modelValue }">
                 <v-row style="width: 120px" justify="center">
