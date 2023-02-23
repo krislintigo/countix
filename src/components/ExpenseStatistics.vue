@@ -3,13 +3,13 @@
     <p class="text-h5">
       Чистый доход: &nbsp;$<strong class="text-h4">{{ netSalary }}</strong>
     </p>
-    <p class="text-h5 mt-1">
-      Запланированные расходы: &nbsp;$<strong class="text-h4">
+    <p class="text-h5 mt-2">
+      Запланировано: &nbsp;$<strong class="text-h4">
         {{ plannedExpensesAmount }}
       </strong>
     </p>
     <p class="text-h5 mt-2">
-      Свободные деньги: &nbsp;$<strong class="text-h4">
+      Свободно: &nbsp;$<strong class="text-h4">
         {{ freeMoney }} ({{ freeMoneyPercent }}%)
       </strong>
     </p>

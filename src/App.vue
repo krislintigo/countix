@@ -1,8 +1,13 @@
 <template>
-  <v-app style="background: white">
+  <v-app>
     <AppBar />
     <v-main v-if="authStore.user" class="mt-10 pb-16">
-      <v-row justify="space-around" class="flex-sm-row-reverse" no-gutters>
+      <v-row
+        justify="space-around"
+        class="flex-sm-row-reverse"
+        no-gutters
+        style="row-gap: 50px"
+      >
         <v-col cols="12" class="v-col-lg-6">
           <v-row justify="center" no-gutters>
             <v-col cols="11" class="v-col-md-9 v-col-sm-10">

@@ -5,6 +5,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { Doughnut } from 'vue-chartjs';
 import {
   Chart as ChartJS,
@@ -16,10 +17,9 @@ import {
   LinearScale,
   ArcElement,
   ChartData,
-  ChartOptions,
 } from 'chart.js';
 import { useExpenseStore } from '@/stores/expense.store';
-import { computed } from 'vue';
+import chartOptions from '@/data/chartOptions';
 
 ChartJS.register(
   Title,
@@ -59,55 +59,6 @@ const chartData = computed<ChartData>(() => ({
       data: expenseStore.data,
     },
   ],
-}));
-
-const chartOptions = computed<ChartOptions>(() => ({
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    title: {
-      display: false,
-    },
-    subtitle: {
-      display: false,
-    },
-    legend: {
-      display: true,
-      position: 'left',
-      align: 'start',
-      labels: {
-        font: {
-          family: 'Rubik',
-        },
-      },
-      title: {
-        display: true,
-        color: 'white',
-        text: 'Расходы',
-        font: {
-          size: 28,
-          family: 'Rubik',
-        },
-      },
-    },
-    tooltip: {
-      backgroundColor: 'white',
-      titleColor: 'dimgray',
-      titleFont: {
-        family: 'Rubik',
-      },
-      bodyColor: 'black',
-      bodyFont: {
-        family: 'Rubik',
-      },
-      callbacks: {
-        beforeBody: function (tooltipItem) {
-          const value = tooltipItem[0].formattedValue;
-          tooltipItem[0].formattedValue = ` $${value}`;
-        },
-      },
-    },
-  },
 }));
 </script>
 
