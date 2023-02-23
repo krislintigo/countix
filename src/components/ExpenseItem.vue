@@ -1,10 +1,13 @@
 <template>
-  <v-card class="mb-3 list-group-item">
+  <v-card v-if="expense" class="mb-3 list-group-item">
     <v-card-title style="max-width: calc(100% - 150px)">
       {{ expense.name }}
     </v-card-title>
     <v-card-text :class="expense.description ? 'pb-0' : 'pb-4'">
-      ${{ expense.amount }}
+      ${{ expense.amount }} (оплачено
+      <span class="text-success" style="font-size: 16px"
+        >${{ (expense.amount * expense.payed).toFixed(0) }}</span
+      >)
     </v-card-text>
     <v-card-subtitle v-if="expense.description" class="pt-2 pb-4">
       {{ expense.description }}
@@ -12,13 +15,6 @@
     <v-menu close-on-content-click>
       <template v-slot:activator="{ props }">
         <v-row class="top-right" align="center">
-          <v-switch
-            v-model="expense.considered"
-            color="primary"
-            density="comfortable"
-            class="mr-4"
-            hide-details
-          />
           <v-menu location="bottom center">
             <template v-slot:activator="{ props }">
               <v-btn
@@ -32,20 +28,27 @@
               </v-btn>
             </template>
             <v-slider
+              v-model="expense.payed"
               style="width: 200px"
               color="success"
               min="0"
               max="1"
-              step="0.01"
-              density="default"
+              step="0.05"
               thumb-label
-            />
+              hide-details
+            >
+              <template v-slot:thumb-label="{ modelValue }">
+                <v-row style="width: 120px" justify="center">
+                  Оплачено: {{ (modelValue * 100).toFixed(0) }}%
+                </v-row>
+              </template>
+            </v-slider>
           </v-menu>
           <v-switch
-            v-model="expense.payed"
-            color="success"
+            v-model="expense.considered"
+            color="primary"
             density="comfortable"
-            class="mr-2"
+            class="mr-4"
             hide-details
           />
           <v-btn icon variant="text" size="40" v-bind="props">
@@ -79,9 +82,8 @@ const props = defineProps<{ id: number }>();
 
 const expenseStore = useExpenseStore();
 
-const expense = computed(
-  () =>
-    expenseStore.flatExpenses.find((expense) => expense.id === props.id) || {}
+const expense = computed(() =>
+  expenseStore.flatExpenses.find((expense) => expense.id === props.id)
 );
 
 const remove = (id: number) => expenseStore.deleteExpense(id);
@@ -90,7 +92,7 @@ const remove = (id: number) => expenseStore.deleteExpense(id);
 <style scoped>
 .top-right {
   position: absolute;
-  top: 10px;
+  top: 13px;
   right: 15px;
 }
 .list-group-item {

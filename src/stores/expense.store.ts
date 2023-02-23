@@ -16,7 +16,7 @@ export interface IExpense {
   amount: number;
   description: string;
   considered: boolean;
-  payed: boolean;
+  payed: number;
 }
 
 export const useExpenseStore = defineStore('expense', {

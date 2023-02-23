@@ -159,7 +159,7 @@ const folderStatistic = (folderId: number) => {
   return {
     all: folder.expenses.reduce((acc, expense) => acc + expense.amount, 0),
     payed: folder.expenses.reduce(
-      (acc, expense) => acc + (expense.payed ? expense.amount : 0),
+      (acc, expense) => acc + +(expense.payed * expense.amount).toFixed(0),
       0
     ),
     considered: folder.expenses.reduce(
@@ -168,7 +168,10 @@ const folderStatistic = (folderId: number) => {
     ),
     pending: folder.expenses.reduce(
       (acc, expense) =>
-        acc + (expense.considered && !expense.payed ? expense.amount : 0),
+        acc +
+        (expense.considered
+          ? +(expense.amount - expense.payed * expense.amount).toFixed(0)
+          : 0),
       0
     ),
   };
