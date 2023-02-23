@@ -46,6 +46,8 @@ import { useFolderStore } from '@/stores/folder.store';
 import { useExpenseStore } from '@/stores/expense.store';
 import { useAuthStore } from '@/stores/auth.store';
 
+window.addEventListener('error', (e) => alert(e));
+
 const authStore = useAuthStore();
 authStore.login(null);
 
