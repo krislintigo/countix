@@ -45,7 +45,7 @@
 
       <v-btn icon variant="text" size="40">
         <v-icon>mdi-dots-vertical</v-icon>
-        <v-menu activator="parent" persistent close-on-content-click>
+        <v-menu activator="parent" close-on-content-click>
           <v-list>
             <v-list-item>
               <v-btn variant="plain" @click="$emit('edit', expense)">
