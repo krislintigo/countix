@@ -19,6 +19,28 @@
             class="mr-4"
             hide-details
           />
+          <v-menu location="bottom center">
+            <template v-slot:activator="{ props }">
+              <v-btn
+                variant="text"
+                density="comfortable"
+                icon
+                v-bind="props"
+                class="mr-4"
+              >
+                <v-icon>mdi-currency-usd</v-icon>
+              </v-btn>
+            </template>
+            <v-slider
+              style="width: 200px"
+              color="success"
+              min="0"
+              max="1"
+              step="0.01"
+              density="default"
+              thumb-label
+            />
+          </v-menu>
           <v-switch
             v-model="expense.payed"
             color="success"
