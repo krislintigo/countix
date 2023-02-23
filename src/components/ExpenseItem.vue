@@ -12,65 +12,65 @@
     <v-card-subtitle v-if="expense.description" class="pt-2 pb-4">
       {{ expense.description }}
     </v-card-subtitle>
-    <v-menu close-on-content-click>
-      <template v-slot:activator="{ props }">
-        <v-row class="top-right" align="center">
-          <v-menu location="bottom left">
-            <template v-slot:activator="{ props }">
-              <v-btn
-                variant="text"
-                density="comfortable"
-                icon
-                v-bind="props"
-                class="mr-4"
-              >
-                <v-icon>mdi-currency-usd</v-icon>
-              </v-btn>
-            </template>
-            <v-slider
-              v-model="expense.payed"
-              color="success"
-              min="0"
-              max="1"
-              step="0.05"
-              thumb-label
-              hide-details
-              style="width: 120px"
-            >
-              <template v-slot:thumb-label="{ modelValue }">
-                <v-row style="width: 120px" justify="center">
-                  Оплачено: {{ (modelValue * 100).toFixed(0) }}%
-                </v-row>
-              </template>
-            </v-slider>
-          </v-menu>
-          <v-switch
-            v-model="expense.considered"
-            color="primary"
+    <v-row class="top-right" align="center">
+      <v-menu location="bottom left">
+        <template v-slot:activator="{ props }">
+          <v-btn
+            variant="text"
             density="comfortable"
+            icon
+            v-bind="props"
             class="mr-4"
-            hide-details
-          />
+          >
+            <v-icon>mdi-currency-usd</v-icon>
+          </v-btn>
+        </template>
+        <v-slider
+          v-model="expense.payed"
+          color="success"
+          min="0"
+          max="1"
+          step="0.05"
+          thumb-label
+          hide-details
+          style="width: 120px"
+        >
+          <template v-slot:thumb-label="{ modelValue }">
+            <v-row style="width: 120px" justify="center">
+              Оплачено: {{ (modelValue * 100).toFixed(0) }}%
+            </v-row>
+          </template>
+        </v-slider>
+      </v-menu>
+      <v-switch
+        v-model="expense.considered"
+        color="primary"
+        density="comfortable"
+        class="mr-4"
+        hide-details
+      />
+      <v-menu close-on-content-click>
+        <template v-slot:activator="{ props }">
           <v-btn icon variant="text" size="40" v-bind="props">
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
-        </v-row>
-      </template>
-      <v-list>
-        <v-list-item>
-          <v-btn variant="plain" @click="$emit('edit', expense)">
-            <v-icon>mdi-pen</v-icon>
-            ⁣⁣Edit
-          </v-btn>
-        </v-list-item>
-        <v-list-item>
-          <v-btn variant="plain" @click="remove(expense.id)">
-            <v-icon>mdi-delete</v-icon>
-            ⁣⁣Delete
-          </v-btn>
-        </v-list-item>
-      </v-list>
-    </v-menu>
+        </template>
+        <v-list>
+          <v-list-item>
+            <v-btn variant="plain" @click="$emit('edit', expense)">
+              <v-icon>mdi-pen</v-icon>
+              ⁣⁣Edit
+            </v-btn>
+          </v-list-item>
+          <v-list-item>
+            <v-btn variant="plain" @click="remove(expense.id)">
+              <v-icon>mdi-delete</v-icon>
+              ⁣⁣Delete
+            </v-btn>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </v-row>
   </v-card>
 </template>
 
