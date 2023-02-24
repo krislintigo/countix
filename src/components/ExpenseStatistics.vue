@@ -1,5 +1,5 @@
 <template>
-  <v-row class="mt-10 pa-2">
+  <v-row class="mt-6 pa-2">
     <v-col cols="12">
       <DescriptionItem color="white" label="Зарплата / Налоги">
         $<strong class="text-h4">{{ salary }}</strong> / $<strong
@@ -25,11 +25,6 @@
       <DescriptionItem color="warning" label="Не оплачено">
         $<strong class="text-h4">
           {{ pendingExpensesAmount }}
-          ({{
-            ((pendingExpensesAmount / consideredExpensesAmount) * 100).toFixed(
-              0
-            )
-          }}%)
         </strong>
       </DescriptionItem>
     </v-col>

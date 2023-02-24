@@ -28,23 +28,6 @@ const authStore = useAuthStore();
 const { user } = storeToRefs(authStore);
 
 const userLogin = ref('');
-
-// const handleUserAction = async (action: 'register' | 'login' | 'logout') => {
-//   try {
-//     const response = await AuthAPI[action](auth);
-//     if (action === 'logout') store.commit(userNames.resetUser);
-//     else store.commit(userNames.setUser, response.data);
-//     ElNotification.success({
-//       title: response.message,
-//       position: 'bottom-right',
-//     });
-//   } catch (e: any) {
-//     ElNotification.error({
-//       title: e.response.data.message,
-//       position: 'bottom-right',
-//     });
-//   }
-// };
 </script>
 
 <style scoped></style>
