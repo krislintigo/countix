@@ -3,6 +3,11 @@ import { ChartOptions } from 'chart.js';
 export default {
   responsive: true,
   maintainAspectRatio: false,
+  elements: {
+    point: {
+      borderWidth: 0,
+    },
+  },
   plugins: {
     title: {
       display: false,
@@ -15,6 +20,8 @@ export default {
       position: 'left',
       align: 'start',
       labels: {
+        color: 'darkgrey',
+        usePointStyle: true,
         boxWidth: 25,
         boxHeight: 10,
         font: {

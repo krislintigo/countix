@@ -5,7 +5,7 @@
       :class="[statusClass]"
       style="width: 20px; height: 20px"
     />
-    <div class="text-h5 text-grey">{{ label }}</div>
+    <div class="text-h6 text-grey">{{ label }}</div>
   </div>
   <div class="text-h5">
     <slot name="default" />

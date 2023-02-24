@@ -17,7 +17,7 @@
     <v-col cols="12" class="v-col-sm-6">
       <DescriptionItem color="primary" label="Запланировано">
         $<strong class="text-h4">
-          {{ plannedExpensesAmount }}
+          {{ consideredExpensesAmount }}
         </strong>
       </DescriptionItem>
     </v-col>
@@ -25,18 +25,23 @@
       <DescriptionItem color="warning" label="Не оплачено">
         $<strong class="text-h4">
           {{ pendingExpensesAmount }}
+          ({{
+            ((pendingExpensesAmount / consideredExpensesAmount) * 100).toFixed(
+              0
+            )
+          }}%)
         </strong>
       </DescriptionItem>
     </v-col>
     <v-col cols="12" class="v-col-sm-6">
       <DescriptionItem color="success" label="Свободно">
         $<strong class="text-h4">
-          {{ freeMoney }} ({{ freeMoneyPercent }}%)
+          {{ freeMoney }} ({{ ((freeMoney / netSalary) * 100).toFixed(0) }}%)
         </strong>
       </DescriptionItem>
     </v-col>
     <v-col cols="12">
-      <DescriptionItem color="blue-grey" label="У меня есть / Доступно">
+      <DescriptionItem color="blue-grey" label="Есть / Доступно">
         $<strong class="text-h4"> {{ available }} </strong> / $<strong
           class="text-h4"
         >
@@ -44,10 +49,11 @@
         </strong>
       </DescriptionItem>
     </v-col>
-    <v-col cols="12" class="v-col-sm-6">
-      <DescriptionItem color="teal" label="Всего">
+    <v-col cols="12">
+      <DescriptionItem color="teal" label="Имеется / Всего">
+        $<strong class="text-h4"> {{ freeMoney + available }} </strong> /
         $<strong class="text-h4">
-          {{ freeMoney + available }}
+          {{ freeMoney + total }}
         </strong>
       </DescriptionItem>
     </v-col>
@@ -67,8 +73,7 @@ const {
   total,
   netSalary,
   freeMoney,
-  freeMoneyPercent,
-  plannedExpensesAmount,
+  consideredExpensesAmount,
   pendingExpensesAmount,
 } = storeToRefs(moneyStore);
 </script>

@@ -34,7 +34,6 @@ ChartJS.register(
 const expenseStore = useExpenseStore();
 
 const chartData = computed<ChartData>(() => ({
-  // labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
   labels: expenseStore.labels,
   datasets: [
     {
@@ -55,7 +54,30 @@ const chartData = computed<ChartData>(() => ({
         '#EA3546',
         '#43BCCD',
       ],
+      borderWidth: 3,
       data: expenseStore.data,
+      weight: 1.5,
+    },
+    {
+      backgroundColor: [
+        '#3F51B5',
+        '#03A9F4',
+        '#4CAF50',
+        '#F9CE1D',
+        '#FF9800',
+        '#D7263D',
+        '#1B998B',
+        '#2E294E',
+        '#F46036',
+        '#E2C044',
+        '#662E9B',
+        '#F86624',
+        '#F9C80E',
+        '#EA3546',
+        '#43BCCD',
+      ],
+      borderWidth: 3,
+      data: expenseStore.unpayedData,
     },
   ],
 }));

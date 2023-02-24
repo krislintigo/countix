@@ -49,6 +49,12 @@ export const useExpenseStore = defineStore('expense', {
       if (!this) return [];
       return this.consideredExpenses.map((expense) => expense.amount);
     },
+    unpayedData(): number[] {
+      if (!this) return [];
+      return this.consideredExpenses.map(
+        (expense) => expense.amount - expense.payed * expense.amount
+      );
+    },
   },
   actions: {
     setExpenses(expenses: IExpense[]) {

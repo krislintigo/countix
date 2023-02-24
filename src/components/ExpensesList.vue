@@ -78,11 +78,11 @@
               </v-expansion-panel-title>
               <v-expansion-panel-text>
                 <span class="mb-0 text-body-1">
-                  Оплаченные:
+                  Оплачено всего:
                   <span class="text-h6 text-success">
                     ${{ folderStatistic(folder.id).payed }}
                   </span>
-                  ( ещё не оплачено
+                  ( ещё
                   <span class="text-h6 text-warning">
                     ${{ folderStatistic(folder.id).pending }}
                   </span>

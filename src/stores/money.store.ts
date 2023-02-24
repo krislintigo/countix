@@ -17,13 +17,9 @@ export const useMoneyStore = defineStore('money', {
     },
     freeMoney(): number {
       if (!this) return 0;
-      return +(this.netSalary - this.plannedExpensesAmount).toFixed(1);
+      return +(this.netSalary - this.consideredExpensesAmount).toFixed(1);
     },
-    freeMoneyPercent(): number {
-      if (!this) return 0;
-      return +((this.freeMoney / this.netSalary) * 100).toFixed(0);
-    },
-    plannedExpensesAmount(): number {
+    consideredExpensesAmount(): number {
       const expenseStore = useExpenseStore();
       return expenseStore.consideredExpenses.reduce(
         (acc, cur) => acc + cur.amount,
