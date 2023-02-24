@@ -11,12 +11,16 @@ const sync = (target: 'pull' | 'push', data?: any) => {
   if (target === 'pull') {
     moneyStore.setSalary(data.salary || 0);
     moneyStore.setTaxes(data.taxes || 0);
+    moneyStore.setAvailable(data.available || 0);
+    moneyStore.setTotal(data.total || 0);
     folderStore.setFolders(data.folders || []);
     expenseStore.setExpenses(data.expenses || []);
   } else {
     return {
       salary: moneyStore.salary,
       taxes: moneyStore.taxes,
+      available: moneyStore.available,
+      total: moneyStore.total,
       folders: folderStore.folders,
       expenses: expenseStore.expenses,
     };

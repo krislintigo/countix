@@ -19,7 +19,6 @@
         <v-col cols="12" class="v-col-lg-6">
           <v-row justify="center" no-gutters>
             <v-col cols="11" class="v-col-md-9 v-col-sm-10">
-              <SalaryInputs />
               <BasicExpenses />
             </v-col>
           </v-row>

@@ -8,6 +8,8 @@ export const useMoneyStore = defineStore('money', {
   state: () => ({
     salary: 0,
     taxes: 0,
+    available: 0,
+    total: 0,
   }),
   getters: {
     netSalary(state): number {
@@ -43,6 +45,12 @@ export const useMoneyStore = defineStore('money', {
     },
     setTaxes(taxes: number) {
       this.taxes = taxes;
+    },
+    setAvailable(available: number) {
+      this.available = available;
+    },
+    setTotal(total: number) {
+      this.total = total;
     },
   },
 });
