@@ -10,13 +10,13 @@
       </v-btn>
       <v-btn icon color="white">
         <v-icon>mdi-currency-eur</v-icon>
-        <v-menu activator="parent">
+        <v-menu activator="parent" :close-on-content-click="false">
           <ExchangeRate />
         </v-menu>
       </v-btn>
       <v-btn icon color="white">
         <v-icon>mdi-account</v-icon>
-        <v-menu activator="parent">
+        <v-menu activator="parent" :close-on-content-click="false">
           <UserProfile />
         </v-menu>
       </v-btn>

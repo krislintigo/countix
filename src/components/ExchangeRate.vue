@@ -1,5 +1,5 @@
 <template>
-  <v-card :ripple="false" class="pa-3" @click.stop>
+  <v-card :ripple="false" class="pa-3">
     <v-card-title>Курсы валют</v-card-title>
     <v-text-field
       v-model.number="USDValue"

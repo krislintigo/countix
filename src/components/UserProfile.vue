@@ -1,5 +1,5 @@
 <template>
-  <v-card :ripple="false" class="pa-3 pb-8" @click.stop width="300">
+  <v-card :ripple="false" class="pa-3 pb-8" width="300">
     <v-card-title>Профиль</v-card-title>
     <div v-if="user">
       <v-card-subtitle> Добро пожаловать, {{ user }}! </v-card-subtitle>

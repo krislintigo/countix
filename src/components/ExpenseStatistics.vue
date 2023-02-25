@@ -10,7 +10,7 @@
       </DescriptionItem>
     </v-col>
     <v-col cols="12" class="v-col-sm-6">
-      <DescriptionItem color="brown" label="Чистый доход">
+      <DescriptionItem color="red" label="Чистый доход">
         $<strong class="text-h4">{{ netSalary }}</strong>
       </DescriptionItem>
     </v-col>
@@ -36,19 +36,18 @@
       </DescriptionItem>
     </v-col>
     <v-col cols="12">
-      <DescriptionItem color="blue-grey" label="Есть / Доступно">
-        $<strong class="text-h4"> {{ available }} </strong> / $<strong
+      <DescriptionItem color="white" label="У меня есть / Доступно">
+        $<strong class="text-h4"> {{ inStock }} </strong> / $<strong
           class="text-h4"
         >
-          {{ total }}
+          {{ available }}
         </strong>
       </DescriptionItem>
     </v-col>
     <v-col cols="12">
-      <DescriptionItem color="teal" label="Имеется / Всего">
-        $<strong class="text-h4"> {{ freeMoney + available }} </strong> /
+      <DescriptionItem color="teal" label="Всего">
         $<strong class="text-h4">
-          {{ freeMoney + total }}
+          {{ freeMoney + inStock + available }}
         </strong>
       </DescriptionItem>
     </v-col>
@@ -64,8 +63,8 @@ const moneyStore = useMoneyStore();
 
 const {
   salary,
+  inStock,
   available,
-  total,
   netSalary,
   freeMoney,
   consideredExpensesAmount,

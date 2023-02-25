@@ -22,7 +22,7 @@
         <v-row>
           <v-col>
             <v-text-field
-              v-model.number="available"
+              v-model.number="inStock"
               type="number"
               min="0"
               variant="outlined"
@@ -32,7 +32,7 @@
           </v-col>
           <v-col>
             <v-text-field
-              v-model.number="total"
+              v-model.number="available"
               type="number"
               min="0"
               variant="outlined"
@@ -81,14 +81,14 @@ const taxes = computed({
   set: (value) => moneyStore.setTaxes(value),
 });
 
+const inStock = computed({
+  get: () => moneyStore.inStock,
+  set: (value) => moneyStore.setInStock(value),
+});
+
 const available = computed({
   get: () => moneyStore.available,
   set: (value) => moneyStore.setAvailable(value),
-});
-
-const total = computed({
-  get: () => moneyStore.total,
-  set: (value) => moneyStore.setTotal(value),
 });
 </script>
 
