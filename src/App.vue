@@ -19,7 +19,7 @@
         <v-col cols="12" class="v-col-lg-6">
           <v-row justify="center" no-gutters>
             <v-col cols="11" class="v-col-md-9 v-col-sm-10">
-              <BasicExpenses />
+              <ExpenseController />
             </v-col>
           </v-row>
         </v-col>
@@ -35,8 +35,7 @@
 
 <script setup lang="ts">
 import throttle from 'lodash/throttle';
-import SalaryInputs from '@/components/SalaryInputs';
-import BasicExpenses from '@/components/BasicExpenses';
+import ExpenseController from '@/components/ExpenseController.vue';
 import ExpenseStatistics from '@/components/ExpenseStatistics';
 import DonutChart from '@/components/DonutChart';
 import AppBar from '@/components/AppBar';

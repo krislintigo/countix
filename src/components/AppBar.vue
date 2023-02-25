@@ -26,8 +26,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import ExchangeRate from '@/components/ExchangeRate';
-import UserProfile from '@/components/UserProfile.vue';
+import ExchangeRate from '@/components/popups/ExchangeRate.vue';
+import UserProfile from '@/components/popups/UserProfile.vue';
 import BudgetDialog from '@/components/dialogs/BudgetDialog.vue';
 
 const isBudgetDialogOpen = ref(false);
