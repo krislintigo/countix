@@ -2,7 +2,12 @@
   <v-dialog v-model="isOpen" max-width="600px">
     <v-card class="pa-3">
       <v-card-title class="text-h5">Информация о расходе</v-card-title>
-      <v-col @keydown.enter="$emit('save', _expense)">
+      <v-col
+        @keydown.enter="
+          $emit('save', _expense);
+          isOpen = false;
+        "
+      >
         <v-text-field
           v-model="_expense.name"
           variant="outlined"

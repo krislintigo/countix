@@ -2,7 +2,12 @@
   <v-dialog v-model="isOpen" max-width="600px">
     <v-card class="pa-3">
       <v-card-title class="text-h5">Информация о папке</v-card-title>
-      <v-col @keydown.enter="$emit('save', _folder)">
+      <v-col
+        @keydown.enter="
+          $emit('save', _folder);
+          isOpen = false;
+        "
+      >
         <v-text-field
           v-model="_folder.name"
           variant="outlined"
