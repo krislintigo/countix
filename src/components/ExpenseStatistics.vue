@@ -44,13 +44,6 @@
         </strong>
       </DescriptionItem>
     </v-col>
-    <v-col cols="12">
-      <DescriptionItem color="teal" label="Всего">
-        $<strong class="text-h4">
-          {{ freeMoney + inStock + available }}
-        </strong>
-      </DescriptionItem>
-    </v-col>
   </v-row>
 </template>
 
